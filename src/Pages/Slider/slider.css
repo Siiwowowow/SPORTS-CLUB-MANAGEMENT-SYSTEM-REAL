@@ -1,0 +1,45 @@
+/* Arrow styles */
+.carousel .control-arrow {
+    background: rgba(0, 0, 0, 0.3);
+    color: white;
+    font-size: 24px;
+    width: 40px;
+    height: 100%;
+    z-index: 2;
+  }
+  
+  /* Customizing arrow shapes */
+  .carousel .control-prev.control-arrow:before,
+  .carousel .control-next.control-arrow:before {
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    content: '';
+  }
+  
+  .carousel .control-prev.control-arrow:before {
+    border-right: 10px solid white;
+  }
+  
+  .carousel .control-next.control-arrow:before {
+    border-left: 10px solid white;
+  }
+  
+  /* Dot (indicator) styles */
+  .carousel .control-dots {
+    bottom: 10px; /* adjust if needed */
+  }
+  
+  .carousel .control-dots .dot {
+    width: 40px;           /* long pill shape */
+    height: 4px;
+    margin: 0 4px;
+    border-radius: 10px;   /* rounded ends */
+    background: #ffffff;   /* light blue-gray */
+    opacity: 1;
+    transition: background 0.3s ease;
+  }
+  
+  .carousel .control-dots .dot.selected {
+    background: #d9a299;   /* dark teal active color */
+  }
+  

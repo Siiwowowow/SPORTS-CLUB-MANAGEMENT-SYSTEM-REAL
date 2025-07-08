@@ -1,0 +1,113 @@
+[
+    {
+      "id": 1,
+      "region": "Dhaka",
+      "district": "Dhaka",
+      "city": "Dhaka",
+      "covered_area": ["Uttara", "Dhanmondi", "Mirpur", "Mohammadpur"],
+      "status": "active",
+      "flowchart": "https://example.com/dhaka-flowchart.png",
+      "longitude": 90.4125,
+      "latitude": 23.8103
+    },
+    {
+      "id": 2,
+      "region": "Chittagong",
+      "district": "Chittagong",
+      "city": "Chittagong",
+      "covered_area": ["Agrabad", "Panchlaish", "Halishahar", "Khulshi"],
+      "status": "active",
+      "flowchart": "https://example.com/chittagong-flowchart.png",
+      "longitude": 91.7832,
+      "latitude": 22.3569
+    },
+    {
+      "id": 3,
+      "region": "Rajshahi",
+      "district": "Rajshahi",
+      "city": "Rajshahi",
+      "covered_area": ["Shaheb Bazar", "Uposhor", "Rajpara"],
+      "status": "active",
+      "flowchart": "https://example.com/rajshahi-flowchart.png",
+      "longitude": 88.6000,
+      "latitude": 24.3745
+    },
+    {
+      "id": 4,
+      "region": "Dhaka",
+      "district": "Gazipur",
+      "city": "Gazipur",
+      "covered_area": ["Tongi", "Board Bazar"],
+      "status": "active",
+      "flowchart": "https://example.com/gazipur-flowchart.png",
+      "longitude": 90.4125,
+      "latitude": 23.9999
+    },
+    {
+      "id": 5,
+      "region": "Dhaka",
+      "district": "Narayanganj",
+      "city": "Narayanganj",
+      "covered_area": ["Fatullah", "Siddhirganj"],
+      "status": "active",
+      "flowchart": "https://example.com/narayanganj-flowchart.png",
+      "longitude": 90.5286,
+      "latitude": 23.6238
+    },
+    {
+      "id": 6,
+      "region": "Chittagong",
+      "district": "Cox's Bazar",
+      "city": "Cox's Bazar",
+      "covered_area": ["Laboni", "Kolatoli"],
+      "status": "active",
+      "flowchart": "https://example.com/coxbazar-flowchart.png",
+      "longitude": 91.9743,
+      "latitude": 21.4272
+    },
+    {
+      "id": 7,
+      "region": "Rajshahi",
+      "district": "Pabna",
+      "city": "Pabna",
+      "covered_area": ["Ishwardi", "Pabna Sadar"],
+      "status": "active",
+      "flowchart": "https://example.com/pabna-flowchart.png",
+      "longitude": 89.2332,
+      "latitude": 24.0064
+    },
+    {
+      "id": 8,
+      "region": "Dhaka",
+      "district": "Manikganj",
+      "city": "Manikganj",
+      "covered_area": ["Manikganj Sadar"],
+      "status": "active",
+      "flowchart": "https://example.com/manikganj-flowchart.png",
+      "longitude": 89.9680,
+      "latitude": 23.8617
+    },
+    {
+      "id": 9,
+      "region": "Chittagong",
+      "district": "Rangamati",
+      "city": "Rangamati",
+      "covered_area": ["Tabalchhari", "Reserve Bazar"],
+      "status": "active",
+      "flowchart": "https://example.com/rangamati-flowchart.png",
+      "longitude": 92.2985,
+      "latitude": 22.6500
+    },
+    {
+      "id": 10,
+      "region": "Rajshahi",
+      "district": "Naogaon",
+      "city": "Naogaon",
+      "covered_area": ["Naogaon Sadar"],
+      "status": "active",
+      "flowchart": "https://example.com/naogaon-flowchart.png",
+      "longitude": 88.9306,
+      "latitude": 24.8042
+    }
+  ]
+  
