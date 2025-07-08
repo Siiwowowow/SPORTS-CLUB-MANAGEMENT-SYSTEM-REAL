@@ -5,6 +5,7 @@ import MainLayout from "../Layout/MainLayout/MainLayout";
 import Home from "../Component/Home/Home";
 import Signup from "../Component/Authentication/Signup/Signup";
 import Login from "../Component/Authentication/Login/Login";
+import GameCourt from "../Component/GameCourt/GameCourt";
  export const router = createBrowserRouter([
     {
       path: "/",
@@ -15,6 +16,10 @@ import Login from "../Component/Authentication/Login/Login";
           index:true,
           element:<Home></Home>,
           loader:()=>fetch('./location.json')
+        },
+        {
+          path:'/by-courts',
+          element:<GameCourt></GameCourt>
         },
         {
           path:'/register',
