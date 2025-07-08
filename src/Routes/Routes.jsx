@@ -19,7 +19,8 @@ import GameCourt from "../Component/GameCourt/GameCourt";
         },
         {
           path:'/by-courts',
-          element:<GameCourt></GameCourt>
+          element:<GameCourt></GameCourt>,
+          loader:()=>fetch(`${import.meta.env.VITE_API_URL}/allCourts`)
         },
         {
           path:'/register',
