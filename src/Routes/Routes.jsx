@@ -8,6 +8,9 @@ import Login from "../Component/Authentication/Login/Login";
 import GameCourt from "../Component/GameCourt/GameCourt";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import ErrorPage from "../Pages/Share/ErrorPage/ErrorPage";
+import DashBoardLayout from "../Layout/DashBoard/DasBoardlayout/DashBoardLayout";
+import DashBoardHome from "../Layout/DashBoard/DashBoardHome/DashBoardHome";
+import MyProfile from "../Pages/DashBoardPages/MyProfile";
 
  export const router = createBrowserRouter([
     {
@@ -37,4 +40,18 @@ import ErrorPage from "../Pages/Share/ErrorPage/ErrorPage";
         },
       ]
     },
+    {
+      path:'/dashboard',
+      element:<PrivateRoute><DashBoardLayout></DashBoardLayout></PrivateRoute>,
+      children:[
+        {
+          path:'/dashboard',
+          element:<PrivateRoute><DashBoardHome></DashBoardHome></PrivateRoute>
+        },
+        {
+          path:'/dashboard/my-profile',
+          element:<PrivateRoute><MyProfile></MyProfile></PrivateRoute>
+        },
+    ]
+    }
   ]);

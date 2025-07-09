@@ -1,3 +1,5 @@
+// src/Pages/Login/Login.jsx
+
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router';
@@ -5,28 +7,33 @@ import toast from 'react-hot-toast';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 import useAuth from '../../../Hooks/useAuth';
+import useAxios from '../../../Hooks/useAxios';
 import SocialLogin from '../SocialLogin/SocialLogin';
-
 
 const Login = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const { signInUser } = useAuth();
+  const axiosInstance = useAxios();
   const location = useLocation();
   const navigate = useNavigate();
-  const from = location.state?.from || '/';
+  const from = location.state?.from?.pathname || '/';
   const [showPassword, setShowPassword] = useState(false);
 
-  const onSubmit = data => {
-    signInUser(data.email, data.password)
-      .then(res => {
-        console.log(res)
-        toast.success('Signin successful');
-        navigate(from);
-      })
-      .catch(err => {
-        toast.error('Sign in failed');
-        console.error(err);
-      });
+  const onSubmit = async (data) => {
+    try {
+      // 1️⃣ Sign in using Firebase
+      await signInUser(data.email, data.password);
+
+      // 2️⃣ Update last login in backend
+      await axiosInstance.post('/users', { email: data.email });
+
+      // 3️⃣ Success notification & navigation
+      toast.success('Signin successful');
+      navigate(from, { replace: true });
+    } catch (err) {
+      console.error(err);
+      toast.error(err.message || 'Sign in failed');
+    }
   };
 
   return (
@@ -78,16 +85,19 @@ const Login = () => {
               )}
             </div>
 
+            {/* Submit Button */}
+            <button
+              type="submit"
+              className="btn w-full text-white bg-[#EC7272] hover:bg-[#e95555] transition-colors duration-200"
+            >
+              Login
+            </button>
+
+            {/* Forgot & Sign Up */}
             <div className="flex justify-end text-sm">
               <a className="link link-hover text-blue-500">Forgot password?</a>
             </div>
 
-            {/* Submit Button */}
-            <button className="btn w-full text-white bg-[#EC7272] hover:bg-[#e95555] transition-colors duration-200">
-              Login
-            </button>
-
-            {/* Sign Up Prompt */}
             <p className="text-center text-sm mt-2">
               Don't have an account?{' '}
               <Link to="/register" state={{ from }} className="text-blue-600 underline font-medium">
