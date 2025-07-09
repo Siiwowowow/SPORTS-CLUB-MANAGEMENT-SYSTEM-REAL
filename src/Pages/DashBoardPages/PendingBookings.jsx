@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-import useAxios from '../../Hooks/useAxios';
+
 import { FaTrash } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import LoadingSpiner from '../Share/Spinner/LoadingSpiner';
 import useAuth from '../../Hooks/useAuth';
+import useAxiosSecure from '../../Hooks/useAxiosSecure';
 
 const PendingBookings = () => {
-    const axiosInstance = useAxios();
+    const axiosInstance =useAxiosSecure()
     const [pendingBookings, setPendingBookings] = useState([]);
     const [loading, setLoading] = useState(true);
     const { user } = useAuth();

@@ -4,8 +4,9 @@ import { useNavigate } from 'react-router';
 import BookingModal from './BookingModal';
 import useAuth from '../../Hooks/useAuth';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import useAxios from '../../Hooks/useAxios';
+
 import toast from 'react-hot-toast';
+import useAxiosSecure from '../../Hooks/useAxiosSecure';
 
 const GameCard = ({ court }) => {
     const {
@@ -24,7 +25,7 @@ const GameCard = ({ court }) => {
 
     const { user } = useAuth();
     const navigate = useNavigate();
-    const axiosInstance = useAxios();
+    const axiosInstance = useAxiosSecure();
     const queryClient = useQueryClient();
 
     // Booking mutation using TanStack Query

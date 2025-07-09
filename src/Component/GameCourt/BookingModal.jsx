@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
 import useAuth from '../../Hooks/useAuth';
 import { FaCalendarAlt } from 'react-icons/fa';
-import useAxios from '../../Hooks/useAxios';
+import useAxiosSecure from '../../Hooks/useAxiosSecure';
 
 const BookingModal = ({ isOpen, onClose, court }) => {
   const { user } = useAuth();
-  const axiosInstance = useAxios();
+  const axiosInstance = useAxiosSecure();
 
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedSlots, setSelectedSlots] = useState([]);
