@@ -11,6 +11,8 @@ import ErrorPage from "../Pages/Share/ErrorPage/ErrorPage";
 import DashBoardLayout from "../Layout/DashBoard/DasBoardlayout/DashBoardLayout";
 import DashBoardHome from "../Layout/DashBoard/DashBoardHome/DashBoardHome";
 import MyProfile from "../Pages/DashBoardPages/MyProfile";
+import PendingBookings from "../Pages/DashBoardPages/PendingBookings";
+import Announcements from "../Pages/DashBoardPages/Announcements";
 
  export const router = createBrowserRouter([
     {
@@ -51,6 +53,14 @@ import MyProfile from "../Pages/DashBoardPages/MyProfile";
         {
           path:'/dashboard/my-profile',
           element:<PrivateRoute><MyProfile></MyProfile></PrivateRoute>
+        },
+        {
+          path:'/dashboard/pending-bookings',
+          element:<PrivateRoute><PendingBookings></PendingBookings></PrivateRoute>
+        },
+        {
+          path:'/dashboard/announcements',
+          element:<PrivateRoute><Announcements></Announcements></PrivateRoute>
         },
     ]
     }

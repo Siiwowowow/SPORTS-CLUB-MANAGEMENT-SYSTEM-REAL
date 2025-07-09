@@ -107,7 +107,7 @@ const Navbar = () => {
                                     )}
                                 </div>
                             </div>
-                            <div className="absolute -bottom-8 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-6 py-1 rounded opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
+                            <div className="absolute -bottom-8 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
                                 {user.displayName || user.email?.split('@')[0]}
                             </div>
                         </div>

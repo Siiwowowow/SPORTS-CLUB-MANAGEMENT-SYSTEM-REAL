@@ -1,12 +1,15 @@
 import { FaStar, FaClock } from 'react-icons/fa';
 import { useState } from 'react';
-import { useNavigate } from 'react-router'; // ✅ import navigate
+import { useNavigate } from 'react-router';
 import BookingModal from './BookingModal';
 import useAuth from '../../Hooks/useAuth';
-
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import useAxios from '../../Hooks/useAxios';
+import toast from 'react-hot-toast';
 
 const GameCard = ({ court }) => {
     const {
+        _id,
         name,
         type,
         pricePerHour,
@@ -19,12 +22,30 @@ const GameCard = ({ court }) => {
     const [selectedSlot, setSelectedSlot] = useState(slot_times[0]);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const { user } = useAuth(); // ✅ get user
-    const navigate = useNavigate(); // ✅ get navigate
+    const { user } = useAuth();
+    const navigate = useNavigate();
+    const axiosInstance = useAxios();
+    const queryClient = useQueryClient();
+
+    // Booking mutation using TanStack Query
+    const { mutate: createBooking, isPending } = useMutation({
+        mutationFn: async (bookingData) => {
+            const response = await axiosInstance.post('/bookings', bookingData);
+            return response.data;
+        },
+        onSuccess: () => {
+            toast.success('Booking created successfully!');
+            queryClient.invalidateQueries({ queryKey: ['bookings'] });
+            handleCloseModal();
+        },
+        onError: (error) => {
+            toast.error(error.response?.data?.message || 'Failed to create booking');
+        }
+    });
 
     const handleOpenModal = () => {
         if (!user) {
-            navigate('/login'); // ✅ redirect to login if user not logged in
+            navigate('/login', { state: { from: location } });
             return;
         }
         setIsModalOpen(true);
@@ -32,6 +53,23 @@ const GameCard = ({ court }) => {
 
     const handleCloseModal = () => {
         setIsModalOpen(false);
+    };
+
+    const handleBookingSubmit = (bookingData) => {
+        const fullBookingData = {
+            courtId: _id,
+            courtName: name,
+            courtType: type,
+            userEmail: user.email,
+            userName: user.displayName,
+            bookingDate: new Date().toISOString(),
+            timeSlots: [selectedSlot],
+            totalPrice: pricePerHour,
+            status: 'pending',
+            ...bookingData
+        };
+
+        createBooking(fullBookingData);
     };
 
     return (
@@ -107,6 +145,8 @@ const GameCard = ({ court }) => {
                 onClose={handleCloseModal}
                 court={court}
                 selectedSlot={selectedSlot}
+                onSubmit={handleBookingSubmit}
+                isSubmitting={isPending}
             />
         </div>
     );
