@@ -1,17 +1,29 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router';
+import { Link, NavLink, useNavigate } from 'react-router';
 import { FaHome } from 'react-icons/fa';
 import useAuth from '../../Hooks/useAuth';
 import BrandLogo from '../../Pages/Share/BrandLogo/BrandLogo';
 import { FiMap, FiUser, FiLogOut, FiSettings } from 'react-icons/fi';
+import toast from 'react-hot-toast';
 
 const Navbar = () => {
     const { user, logOut } = useAuth();
+    const navigate = useNavigate();
 
     const handleLogout = () => {
         logOut()
-            .then(() => console.log('Logged out'))
-            .catch(console.error);
+            .then(() => {
+                // Show success toast
+                toast.success('Logged out successfully!');
+                // Navigate to login page after a short delay
+                setTimeout(() => {
+                    navigate('/login');
+                }, 1000);
+            })
+            .catch((error) => {
+                console.error(error);
+                toast.error('Failed to log out');
+            });
     };
 
     const navItems = (
@@ -85,7 +97,7 @@ const Navbar = () => {
                                 className="btn btn-ghost btn-circle avatar"
                                 aria-label="User menu"
                             >
-                                <div className="w-10 rounded-full ring ring-[#D9A299] ring-offset-2 overflow-hidden">
+                                <div className="w-7 rounded-full ring ring-[#D9A299] ring-offset-1 overflow-hidden">
                                     {user.photoURL ? (
                                         <img src={user.photoURL} alt="User Avatar" />
                                     ) : (
@@ -95,31 +107,30 @@ const Navbar = () => {
                                     )}
                                 </div>
                             </div>
-                            {/* Username tooltip - now properly positioned and styled */}
-                            <div className="absolute -bottom-8  transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
+                            <div className="absolute -bottom-8 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-6 py-1 rounded opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
                                 {user.displayName || user.email?.split('@')[0]}
                             </div>
                         </div>
 
                         <ul
                             tabIndex={0}
-                            className="menu dropdown-content bg-base-100 shadow-lg rounded-box w-52 mt-3 p-2 z-10"
+                            className="menu dropdown-content bg-base-100 shadow-lg rounded-box w-64 mt-4 p-2 z-10"
                         >
                             <li className="px-2 py-2">
                                 <div className="flex items-center gap-3">
                                     <div className="avatar">
-                                        <div className="w-10 rounded-full">
+                                        <div className="w-8 -ml-4 rounded-full">
                                             {user.photoURL ? (
                                                 <img src={user.photoURL} alt="User Avatar" />
                                             ) : (
-                                                <div className="bg-gray-400 text-white flex items-center justify-center w-full h-full rounded-full text-lg font-semibold select-none">
+                                                <div className="bg-gray-400 text-white flex items-start justify-center w-full h-full rounded-full text-lg font-semibold select-none">
                                                     {user.email?.charAt(0).toUpperCase()}
                                                 </div>
                                             )}
                                         </div>
                                     </div>
                                     <div>
-                                        <p className="font-bold">{user.displayName || 'User'}</p>
+                                        <p className="font-bold text-sm">{user.displayName || 'User'}</p>
                                         <p className="text-xs text-gray-500">{user.email}</p>
                                     </div>
                                 </div>

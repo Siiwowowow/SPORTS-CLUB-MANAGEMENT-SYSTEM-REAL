@@ -1,5 +1,6 @@
-import Button from '../../components/Shared/Button/Button'
+
 import { Link } from 'react-router'
+import Button from '../Button/Button'
 const EmptyState = ({ message, address, label }) => {
   return (
     <div className='h-screen gap-5 flex flex-col justify-center items-center pb-16 '>
