@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getAuth } from 'firebase/auth';
 
 const axiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000',
+  baseURL: `https://scms-a12-server.vercel.app`,
 });
 
 // 🔐 Add interceptor to attach Firebase token
