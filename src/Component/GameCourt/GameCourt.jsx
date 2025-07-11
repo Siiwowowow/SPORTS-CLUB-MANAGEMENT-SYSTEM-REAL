@@ -2,8 +2,44 @@ import React, { useState } from 'react';
 import Container from '../../Pages/Share/Container/Container';
 import GameCard from './GameCard';
 import EmptyState from '../../Pages/Share/EmptyState/EmptyState';
-import { useCourts } from '../../Hooks/useCourts';
+import { useQuery } from '@tanstack/react-query';
+import useAuth from '../../Hooks/useAuth';
+import { useNavigate } from 'react-router';
+import useAxiosSecure from '../../Hooks/useAxiosSecure';
 
+const useCourts = (currentPage) => {
+  const { user } = useAuth();
+  const axiosInstance = useAxiosSecure()
+  const navigate = useNavigate();
+
+  return useQuery({
+    queryKey: ['courts', currentPage],
+    queryFn: async () => {
+      try {
+        if (!user) {
+          navigate('/login');
+          return;
+        }
+
+        const token = await user.getIdToken();
+        const response = await axiosInstance.get(`/allCourts?page=${currentPage}&limit=6`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+        return response.data;
+      } catch (error) {
+        if (error.response?.status === 401) {
+          navigate('/login');
+        }
+        throw error;
+      }
+    },
+    enabled: !!user,
+    staleTime: 5 * 60 * 1000, // 5 minutes cache
+    retry: 1
+  });
+};
 
 const GameCourt = () => {
     const [currentPage, setCurrentPage] = useState(1);
@@ -27,16 +63,18 @@ const GameCourt = () => {
                 </p>
 
                 {isLoading ? (
-                    <p className="text-center py-12 font-medium">Loading courts...</p>
+                    <div className="flex justify-center py-12">
+                        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-[#d9a299]"></div>
+                    </div>
                 ) : isError ? (
                     <p className="text-center py-12 font-medium text-red-500">
-                        Failed to load courts: {error.message}
+                        {error.response?.data?.message || error.message || 'Failed to load courts'}
                     </p>
                 ) : courts.length > 0 ? (
                     <>
                         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4'>
                             {courts.map((court) => (
-                                <GameCard  court={court} key={court._id} />
+                                <GameCard court={court} key={court._id} />
                             ))}
                         </div>
 
@@ -69,7 +107,7 @@ const GameCourt = () => {
                         )}
                     </>
                 ) : (
-                    <EmptyState message="No Data Is Available Right Now!" />
+                    <EmptyState message="No courts available at the moment. Please check back later!" />
                 )}
             </div>
         </Container>

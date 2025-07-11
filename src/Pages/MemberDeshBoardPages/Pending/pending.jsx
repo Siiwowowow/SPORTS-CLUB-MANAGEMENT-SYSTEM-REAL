@@ -3,9 +3,12 @@ import toast from 'react-hot-toast';
 
 import { FaTrash } from 'react-icons/fa';
 import Swal from 'sweetalert2';
-import LoadingSpiner from '../Share/Spinner/LoadingSpiner';
-import useAxiosSecure from '../../hooks/useAxiosSecure';
-import useAuth from '../../hooks/useAuth';
+
+
+
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import useAuth from '../../../hooks/useAuth';
+import LoadingSpiner from '../../Share/Spinner/LoadingSpiner';
 
 
 const PendingBookings = () => {

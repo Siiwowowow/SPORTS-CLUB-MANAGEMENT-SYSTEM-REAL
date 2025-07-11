@@ -1,30 +1,34 @@
 import React, { useEffect, useState } from 'react';
-import toast from 'react-hot-toast';
-
-import { FaTrash } from 'react-icons/fa';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import useAuth from '../../../hooks/useAuth';
+import LoadingSpiner from '../../Share/Spinner/LoadingSpiner';
+import { useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
-import LoadingSpiner from '../Share/Spinner/LoadingSpiner';
-import useAxiosSecure from '../../hooks/useAxiosSecure';
-import useAuth from '../../hooks/useAuth';
+import { FaTrash, FaMoneyBillWave } from 'react-icons/fa';
 
-
-const PendingBookings = () => {
-    const axiosInstance =useAxiosSecure()
-    const [pendingBookings, setPendingBookings] = useState([]);
-    const [loading, setLoading] = useState(true);
+const Approved = () => {
+    const axiosInstance = useAxiosSecure();
     const { user } = useAuth();
+    const [approvedBookings, setApprovedBookings] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
-    const fetchPendingBookings = async () => {
+    const fetchApprovedBookings = async () => {
         setLoading(true);
         try {
-            const res = await axiosInstance.get(`/bookings?status=pending&email=${user.email}`);
-            setPendingBookings(res.data);
+            const res = await axiosInstance.get(`/bookings?status=approved&email=${user.email}`);
+            setApprovedBookings(res.data);
         } catch (error) {
             console.error(error);
-            toast.error(error.response?.data?.message || 'Failed to fetch bookings');
         } finally {
             setLoading(false);
         }
+    };
+
+    const handlePayment = (booking) => {
+        navigate(`/member-dashboard/payment/${booking._id}`, { 
+            state: { bookingData: booking } 
+        });
     };
 
     const handleCancel = async (id) => {
@@ -41,7 +45,7 @@ const PendingBookings = () => {
 
             if (result.isConfirmed) {
                 await axiosInstance.delete(`/bookings/${id}`);
-                setPendingBookings(prev => prev.filter(booking => booking._id !== id));
+                setApprovedBookings(prev => prev.filter(booking => booking._id !== id));
                 Swal.fire('Cancelled', 'Booking has been cancelled.', 'success');
             }
         } catch (error) {
@@ -56,7 +60,7 @@ const PendingBookings = () => {
 
     useEffect(() => {
         if (user?.email) {
-            fetchPendingBookings();
+            fetchApprovedBookings();
         }
     }, [user]);
 
@@ -66,10 +70,10 @@ const PendingBookings = () => {
 
     return (
         <div className="max-w-6xl mx-auto p-4">
-            <h1 className="text-2xl font-bold text-center mb-6 text-gray-800">My Pending Bookings</h1>
+            <h1 className="text-2xl font-bold text-center mb-6 text-gray-800">My Approved Bookings</h1>
 
-            {pendingBookings.length === 0 ? (
-                <div className="text-center text-gray-500">You have no pending bookings.</div>
+            {approvedBookings.length === 0 ? (
+                <div className="text-center text-gray-500">You have no approved bookings.</div>
             ) : (
                 <div className="overflow-x-auto rounded-lg shadow border border-gray-200">
                     <table className="min-w-full text-sm text-left text-gray-700">
@@ -80,11 +84,11 @@ const PendingBookings = () => {
                                 <th className="px-4 py-3">Slots</th>
                                 <th className="px-4 py-3">Price</th>
                                 <th className="px-4 py-3">Status</th>
-                                <th className="px-4 py-3">Action</th>
+                                <th className="px-4 py-3">Actions</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-200 bg-white">
-                            {pendingBookings.map((booking) => (
+                            {approvedBookings.map((booking) => (
                                 <tr key={booking._id} className="hover:bg-gray-50 transition">
                                     <td className="px-4 py-3">
                                         <div>{booking.courtName}</div>
@@ -105,19 +109,28 @@ const PendingBookings = () => {
                                             ))}
                                         </div>
                                     </td>
-                                    <td className="px-4 py-3">${booking.totalPrice}</td>
                                     <td className="px-4 py-3">
-                                        <span className="inline-flex px-2 py-0.5 text-xs font-semibold bg-yellow-100 text-yellow-800 rounded">
-                                            Pending
-                                        </span>
+                                        ${booking.totalPrice.$numberInt || booking.totalPrice}
                                     </td>
                                     <td className="px-4 py-3">
+                                        <span className="inline-flex px-2 py-0.5 text-xs font-semibold bg-green-100 text-green-800 rounded">
+                                            Approved
+                                        </span>
+                                    </td>
+                                    <td className="px-4 py-3 flex gap-2">
+                                        <button
+                                            onClick={() => handlePayment(booking)}
+                                            className="flex justify-center items-center gap-1 px-2 py-1 bg-green-500 text-white rounded hover:bg-green-600 transition text-xs"
+                                        >
+                                            <FaMoneyBillWave />
+                                            Pay ${booking.totalPrice.$numberInt || booking.totalPrice}
+                                        </button>
                                         <button
                                             onClick={() => handleCancel(booking._id)}
-                                            className="text-red-500 hover:text-red-700 transition"
-                                            title="Cancel Booking"
+                                            className="flex items-center gap-1 px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600 transition text-xs"
                                         >
                                             <FaTrash />
+                                            Cancel
                                         </button>
                                     </td>
                                 </tr>
@@ -130,4 +143,4 @@ const PendingBookings = () => {
     );
 };
 
-export default PendingBookings;
+export default Approved;

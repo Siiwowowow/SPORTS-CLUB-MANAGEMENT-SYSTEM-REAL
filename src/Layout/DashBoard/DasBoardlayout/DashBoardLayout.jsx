@@ -1,118 +1,174 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Outlet, NavLink, useNavigate } from 'react-router';
-import { 
+import {
   FaHome,
   FaUser,
   FaClock,
   FaBullhorn,
   FaBars,
   FaTimes,
+  FaChevronLeft,
+  FaUserShield,
+  FaSignInAlt,
+  FaSignOutAlt
 } from 'react-icons/fa';
+import BrandLogo from '../../../Pages/Share/BrandLogo/BrandLogo';
 
 const DashBoardLayout = () => {
-  const [isDrawerOpen, setIsDrawerOpen] = useState(true);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 1024);
+      if (window.innerWidth >= 1024) {
+        setIsDrawerOpen(true);
+      } else {
+        setIsDrawerOpen(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize();
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const toggleDrawer = () => setIsDrawerOpen(!isDrawerOpen);
   const goHome = () => navigate('/');
+  const goBack = () => navigate(-1);
+
+  // NavItem component
+  const NavItem = ({ to, icon, label }) => {
+    return (
+      <li>
+        <NavLink
+          to={to}
+          end
+          onClick={() => isMobile && setIsDrawerOpen(false)}
+          className={({ isActive }) =>
+            `flex items-center p-3 rounded-lg transition-colors ${
+              isActive
+                ? 'bg-[#FEEBF6] text-[#D9A299] font-medium'
+                : 'text-gray-700 hover:bg-gray-100'
+            }`
+          }
+        >
+          <span className="mr-3">{icon}</span>
+          {label}
+        </NavLink>
+      </li>
+    );
+  };
 
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex h-screen bg-gradient-to-br from-[#F5F5F5] via-[#dbdadb] to-[#e0dddd] overflow-hidden">
+      {/* Mobile Overlay */}
+      {isMobile && isDrawerOpen && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-50 z-20 lg:hidden"
+          onClick={toggleDrawer}
+        />
+      )}
 
-      {/* Mobile & Tablet Header */}
-      <div className="md:hidden fixed top-0 left-0 right-0 bg-white shadow-md p-4 flex justify-between items-center z-20">
-        <button onClick={toggleDrawer} className="text-gray-700">
-          {isDrawerOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
-        </button>
-        <button onClick={goHome} className="text-gray-700">
-          <FaHome size={20} />
-        </button>
-      </div>
-
-      {/* Drawer */}
+      {/* Sidebar Drawer */}
       <div 
-        className={`fixed  z-10 bg-white shadow-lg transition-all duration-300 ease-in-out h-full
-          ${isDrawerOpen ? 'w-64 left-0' : 'w-0 md:w-20 md:left-0 overflow-hidden'}`}
+        className={`fixed lg:static z-30 h-full w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out
+          ${isDrawerOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0`}
       >
-        <div className="p-4 h-full flex flex-col">
-          {/* Desktop Toggle Button */}
-          <div className="hidden md:flex justify-end mb-4">
-            <button 
-              onClick={toggleDrawer}
-              className="text-gray-600 hover:text-gray-900"
-            >
-              {isDrawerOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
-            </button>
+        <div className="flex flex-col h-full">
+          {/* Brand Header */}
+          <div className="p-4 border-b border-gray-200 flex items-center justify-between">
+            <div >
+              <BrandLogo />
+              {isDrawerOpen && (
+                <span className="text-xs ml-3 font-bold text-gray-800">User-Dashboard</span>
+              )}
+            </div>
+            {isMobile && (
+              <button onClick={toggleDrawer} className="text-gray-500 hover:text-gray-700">
+                <FaTimes size={20} />
+              </button>
+            )}
           </div>
 
-          {/* Navigation Links */}
-          <nav className="flex-1">
-            <ul className="space-y-2">
-              <li>
-                <NavLink
-                  to="/"
-                  className={({ isActive }) =>
-                    isActive
-                      ? 'text-[#D9A299] font-bold underline underline-offset-4 flex items-center gap-2 py-2 px-3'
-                      : 'text-gray-700 hover:text-[#D9A299] flex items-center gap-2 py-2 px-3'
-                  }
-                >
-                  <FaHome size={15} />
-                  {isDrawerOpen && <span className='text-sm'>Home</span>}
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/dashboard/my-profile"
-                  className={({ isActive }) =>
-                    isActive
-                      ? 'text-[#D9A299] font-bold underline underline-offset-4 flex items-center gap-2 py-2 px-3'
-                      : 'text-gray-700 hover:text-[#D9A299] flex items-center gap-2 py-2 px-3'
-                  }
-                >
-                  <FaUser size={15} />
-                  {isDrawerOpen && <span className='text-sm'>My Profile</span>}
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/dashboard/pending-bookings"
-                  className={({ isActive }) =>
-                    isActive
-                      ? 'text-[#D9A299] font-bold underline underline-offset-4 flex items-center gap-2 py-2 px-3'
-                      : 'text-gray-700 hover:text-[#D9A299] flex items-center gap-2 py-2 px-3'
-                  }
-                >
-                  <FaClock size={15} />
-                  {isDrawerOpen && <span className='text-sm'>Pending Bookings</span>}
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/dashboard/announcements"
-                  className={({ isActive }) =>
-                    isActive
-                      ? 'text-[#D9A299] font-bold underline underline-offset-4 flex items-center gap-2 py-2 px-3'
-                      : 'text-gray-700 hover:text-[#D9A299] flex items-center gap-2 py-2 px-3'
-                  }
-                >
-                  <FaBullhorn size={15} />
-                  {isDrawerOpen && <span className='text-sm'>Announcements</span>}
-                </NavLink>
-              </li>
-            </ul>
+          {/* Navigation */}
+          <nav className="flex-1 overflow-y-auto p-4 space-y-6">
+            {/* Home */}
+            <div>
+              {isDrawerOpen && <h3 className="text-xs uppercase text-gray-500 font-semibold mb-2">Home</h3>}
+              <ul className="space-y-1">
+                <NavItem to="/" icon={<FaHome />} label="Home" />
+              </ul>
+            </div>
+
+            {/* User Dashboard */}
+            <div>
+              {isDrawerOpen && <h3 className="text-xs uppercase text-gray-500 font-semibold mb-2">User Dashboard</h3>}
+              <ul className="space-y-1">
+                <NavItem to="/dashboard/my-profile" icon={<FaUser />} label="My Profile" />
+                <NavItem to="/dashboard/pending-bookings" icon={<FaClock />} label="Pending Bookings" />
+              </ul>
+            </div>
+
+            {/* Announcements */}
+            <div>
+              {isDrawerOpen && <h3 className="text-xs uppercase text-gray-500 font-semibold mb-2">Announcements</h3>}
+              <ul className="space-y-1">
+                <NavItem to="/dashboard/announcements" icon={<FaBullhorn />} label="Announcements" />
+              </ul>
+            </div>
+
+            {/* Admin Panel - Example (you can adjust as needed) */}
+            <div>
+              {isDrawerOpen && <h3 className="text-xs uppercase text-gray-500 font-semibold mb-2">Admin</h3>}
+              <ul className="space-y-1">
+                <NavItem to="/admin-dashboard" icon={<FaUserShield />} label="Admin Panel" />
+              </ul>
+            </div>
+
+            {/* Auth */}
+            <div>
+              {isDrawerOpen && <h3 className="text-xs uppercase text-gray-500 font-semibold mb-2">Account</h3>}
+              <ul className="space-y-1">
+                <NavItem to="/login" icon={<FaSignInAlt />} label="Login" />
+                <NavItem to="/logout" icon={<FaSignOutAlt />} label="Logout" />
+              </ul>
+            </div>
           </nav>
         </div>
       </div>
 
-      {/* Main Content */}
-      <div
-        className={`flex-1 overflow-auto transition-all duration-300
-        ${isDrawerOpen ? 'ml-0 md:ml-64' : 'ml-0 md:ml-20'}`}
-      >
-        <div className="mt-14 md:mt-0 px-2 md:px-4">
+      {/* Main Content Area */}
+      <div className="flex-1 flex flex-col overflow-hidden">
+        {/* Top Navigation Bar */}
+        <header className="bg-white shadow-sm p-4 flex items-center justify-between">
+          <div className="flex items-center space-x-4">
+            <button 
+              onClick={toggleDrawer}
+              className="text-gray-600 hover:text-gray-900 lg:hidden"
+            >
+              <FaBars size={20} />
+            </button>
+            <button 
+              onClick={goBack}
+              className="text-gray-600 hover:text-gray-900"
+            >
+              <FaChevronLeft size={20} />
+            </button>
+            <button 
+              onClick={goHome}
+              className="text-gray-600 hover:text-gray-900"
+            >
+              <FaHome size={20} />
+            </button>
+          </div>
+        </header>
+
+        {/* Content Area */}
+        <main className="flex-1 overflow-y-auto p-6">
           <Outlet />
-        </div>
+        </main>
       </div>
     </div>
   );

@@ -3,7 +3,7 @@ import React from 'react';
 import useAuth from './useAuth';
 
 const axiosSecure=axios.create({
-    baseURL: `https://scms-a12-server.vercel.app`,
+    baseURL: `http://localhost:3000`,
   
 })
 const useAxiosSecure = () => {

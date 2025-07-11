@@ -52,6 +52,18 @@ const Navbar = () => {
                     <FiMap /> Courts
                 </NavLink>
             </li>
+            <li>
+                <NavLink
+                   to="/main-dashboard"
+                    className={({ isActive }) =>
+                        isActive
+                            ? 'text-[#D9A299] font-bold underline underline-offset-4 flex items-center gap-2'
+                            : 'text-gray-700 hover:text-[#D9A299] flex items-center gap-2'
+                    }
+                >
+                    <FiUser /> Dashboard
+                </NavLink>
+            </li>
         </>
     );
 
@@ -59,8 +71,8 @@ const Navbar = () => {
         <div className="navbar sticky top-0 z-20 bg-base-100 shadow-sm px-4">
             {/* Mobile menu */}
             <div className="navbar-start">
-                <BrandLogo />
-                <div className="dropdown lg:hidden">
+                
+                <div className="dropdown lg:hidden -ml-4">
                     <label tabIndex={0} className="btn btn-ghost">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -79,6 +91,10 @@ const Navbar = () => {
                         {navItems}
                     </ul>
                 </div>
+                <div className=' -ml-4 lg:ml-0'>
+                     <BrandLogo />
+                </div>
+               
             </div>
 
             {/* Desktop menu */}
@@ -91,9 +107,9 @@ const Navbar = () => {
                 {user ? (
                     <div className="dropdown dropdown-end">
                         <div className="group relative">
-                            <div 
-                                tabIndex={0} 
-                                role="button" 
+                            <div
+                                tabIndex={0}
+                                role="button"
                                 className="btn btn-ghost btn-circle avatar"
                                 aria-label="User menu"
                             >
@@ -137,7 +153,7 @@ const Navbar = () => {
                             </li>
                             <div className="divider my-1"></div>
                             <li>
-                                <Link to="/dashboard" className="flex items-center gap-2">
+                                <Link to="/main-dashboard" className="flex items-center gap-2">
                                     <FiUser /> Dashboard
                                 </Link>
                             </li>
@@ -148,8 +164,8 @@ const Navbar = () => {
                             </li>
                             <div className="divider my-1"></div>
                             <li>
-                                <button 
-                                    onClick={handleLogout} 
+                                <button
+                                    onClick={handleLogout}
                                     className="flex items-center gap-2 w-full text-left text-red-500 hover:bg-red-50"
                                 >
                                     <FiLogOut /> Log Out
@@ -158,8 +174,8 @@ const Navbar = () => {
                         </ul>
                     </div>
                 ) : (
-                    <Link 
-                        to="/login" 
+                    <Link
+                        to="/login"
                         className="btn text-white bg-[#D9A299] hover:bg-[#c7938a] transition-colors"
                     >
                         Log In
