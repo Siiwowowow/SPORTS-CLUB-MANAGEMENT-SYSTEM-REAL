@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import useAxiosSecure from '../../../Hooks/useAxiosSecure';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
 
 const Confirm = () => {

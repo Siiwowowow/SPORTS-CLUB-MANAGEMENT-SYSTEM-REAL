@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import useAxiosSecure from '../../../hooks/useAxiosSecure';
-import useAuth from '../../../hooks/useAuth';
+
 import LoadingSpiner from '../../Share/Spinner/LoadingSpiner';
 import { useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
 import { FaTrash, FaMoneyBillWave } from 'react-icons/fa';
+
+import useAuth from '../../../Hooks/useAuth';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
 const Approved = () => {
     const axiosInstance = useAxiosSecure();

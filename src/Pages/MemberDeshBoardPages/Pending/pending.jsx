@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-
 import { FaTrash } from 'react-icons/fa';
 import Swal from 'sweetalert2';
-
-
-
-import useAxiosSecure from '../../../hooks/useAxiosSecure';
-import useAuth from '../../../hooks/useAuth';
 import LoadingSpiner from '../../Share/Spinner/LoadingSpiner';
+
+import useAuth from '../../../Hooks/useAuth';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
 
 const PendingBookings = () => {

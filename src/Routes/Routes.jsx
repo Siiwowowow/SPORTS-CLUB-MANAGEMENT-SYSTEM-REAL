@@ -34,6 +34,7 @@ import ManageCupon from "../Pages/AdmindashBoardPages/ManageCupon";
 import Announcement from "../Pages/AdmindashBoardPages/Announcement";
 import PaymentForm from "../AllForm/PaymentForm/PaymentForm";
 import AdminCoupons from "../AllForm/PaymentForm/AdminCoupons";
+import DashBoardStats from "../Pages/Share/DashBoardStatus/DashBoardStatus";
 
 
 export const router = createBrowserRouter([
@@ -144,6 +145,10 @@ export const router = createBrowserRouter([
       {
        path: '/admin-dashboard/admin-coupons',
        element: <PrivateRoute><AdminCoupons></AdminCoupons></PrivateRoute>
+      },
+      {
+       path: '/admin-dashboard/status',
+       element: <PrivateRoute><DashBoardStats></DashBoardStats></PrivateRoute>
       },
       {
         path: '/admin-dashboard',

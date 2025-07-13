@@ -4,7 +4,7 @@ import AdminCoupons from '../../AllForm/PaymentForm/AdminCoupons';
 const MainDashBoardHome = () => {
     return (
         <div>
-           <AdminCoupons></AdminCoupons>
+           
         </div>
     );
 };

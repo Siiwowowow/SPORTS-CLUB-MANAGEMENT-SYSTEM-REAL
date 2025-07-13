@@ -1,9 +1,10 @@
 import React from 'react';
+import AdminCoupons from '../../AllForm/PaymentForm/AdminCoupons';
 
 const ManageCupon = () => {
     return (
         <div>
-            manage cupon page
+            <AdminCoupons></AdminCoupons>
         </div>
     );
 };
