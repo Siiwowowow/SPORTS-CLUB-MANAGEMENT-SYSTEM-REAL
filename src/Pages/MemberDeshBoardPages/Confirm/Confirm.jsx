@@ -1,28 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import useAuth from '../../../Hooks/useAuth';
 
 
 const Confirm = () => {
     const AxiosSecure = useAxiosSecure();
+    const { user } = useAuth();
     const [confirmedBookings, setConfirmedBookings] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchConfirmedBookings = async () => {
             try {
-                const { data } = await AxiosSecure.get('/bookings', {
-                    params: { status: 'confirmed' }
+                const { data } = await AxiosSecure.get('/bookings/my-confirmed', {
+                    params: { email: user.email }
                 });
                 setConfirmedBookings(data);
             } catch (error) {
-                console.error('Error fetching confirmed bookings:', error);
+                console.error('Error fetching user confirmed bookings:', error);
             } finally {
                 setLoading(false);
             }
         };
 
-        fetchConfirmedBookings();
-    }, [AxiosSecure]);
+        if (user?.email) {
+            fetchConfirmedBookings();
+        }
+    }, [AxiosSecure, user?.email]);
 
     if (loading) {
         return (

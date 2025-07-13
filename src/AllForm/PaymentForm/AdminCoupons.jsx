@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+// AdminCoupons.jsx with Update Feature
 
-import { FaTrash, FaTag, FaCalendarAlt } from 'react-icons/fa';
+import React, { useState, useEffect } from 'react';
+import { FaTrash, FaTag, FaCalendarAlt, FaEdit } from 'react-icons/fa';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import toast from 'react-hot-toast';
@@ -10,15 +11,13 @@ const AdminCoupons = () => {
     const AxiosSecure = useAxiosSecure();
     const [coupons, setCoupons] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [editingCoupon, setEditingCoupon] = useState(null);
     const [form, setForm] = useState({
         code: '',
         discountPercentage: '',
         expiryDate: null,
         usageLimit: ''
     });
-
-    // Color definitions
-    
 
     const fetchCoupons = async () => {
         setLoading(true);
@@ -27,7 +26,6 @@ const AdminCoupons = () => {
             setCoupons(data);
         } catch (err) {
             console.error('Failed to fetch coupons:', err);
-            setCoupons([]);
             toast.error('Failed to load coupons');
         } finally {
             setLoading(false);
@@ -40,19 +38,28 @@ const AdminCoupons = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const toastId = toast.loading('Creating coupon...');
+        const toastId = toast.loading(editingCoupon ? 'Updating coupon...' : 'Creating coupon...');
         try {
-            await AxiosSecure.post('/coupons', {
+            const payload = {
                 code: form.code.toUpperCase(),
                 discountPercentage: parseInt(form.discountPercentage),
                 expiryDate: form.expiryDate || null,
                 usageLimit: form.usageLimit ? parseInt(form.usageLimit) : null,
-            });
-            toast.success('Coupon created successfully!', { id: toastId });
+            };
+
+            if (editingCoupon) {
+                await AxiosSecure.put(`/coupons/${editingCoupon}`, payload);
+                toast.success('Coupon updated successfully!', { id: toastId });
+                setEditingCoupon(null);
+            } else {
+                await AxiosSecure.post('/coupons', payload);
+                toast.success('Coupon created successfully!', { id: toastId });
+            }
+
             setForm({ code: '', discountPercentage: '', expiryDate: null, usageLimit: '' });
             fetchCoupons();
         } catch (err) {
-            toast.error(err.response?.data?.message || 'Error creating coupon', { id: toastId });
+            toast.error(err.response?.data?.message || 'Error saving coupon', { id: toastId });
         }
     };
 
@@ -68,13 +75,24 @@ const AdminCoupons = () => {
         }
     };
 
+    const handleEdit = (coupon) => {
+        setEditingCoupon(coupon._id);
+        setForm({
+            code: coupon.code,
+            discountPercentage: coupon.discountPercentage.toString(),
+            expiryDate: coupon.expiryDate ? new Date(coupon.expiryDate) : null,
+            usageLimit: coupon.usageLimit ? coupon.usageLimit.toString() : ''
+        });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
     const formatDate = (dateString) => {
         if (!dateString) return 'No expiry';
         const date = new Date(dateString);
-        return date.toLocaleDateString('en-US', { 
-            year: 'numeric', 
-            month: 'short', 
-            day: 'numeric' 
+        return date.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
         });
     };
 
@@ -86,7 +104,7 @@ const AdminCoupons = () => {
             </div>
 
             <div className="bg-[#f5e5e2] p-6 rounded-lg mb-8">
-                <h2 className="text-xl font-semibold text-[#5c3a33] mb-4">Create New Coupon</h2>
+                <h2 className="text-xl font-semibold text-[#5c3a33] mb-4">{editingCoupon ? 'Update Coupon' : 'Create New Coupon'}</h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
@@ -150,7 +168,7 @@ const AdminCoupons = () => {
                         type="submit"
                         className="w-full bg-[#d9a299] hover:bg-[#c99289] text-white font-medium py-3 px-4 rounded-lg transition duration-200"
                     >
-                        Create Coupon
+                        {editingCoupon ? 'Update Coupon' : 'Create Coupon'}
                     </button>
                 </form>
             </div>
@@ -214,7 +232,14 @@ const AdminCoupons = () => {
                                                 <span className="text-gray-500">Unlimited</span>
                                             )}
                                         </td>
-                                        <td className="px-6 py-4 whitespace-nowrap">
+                                        <td className="px-6 py-4 whitespace-nowrap flex gap-3">
+                                            <button
+                                                onClick={() => handleEdit(coupon)}
+                                                className="text-blue-500 hover:text-blue-700"
+                                                title="Edit coupon"
+                                            >
+                                                <FaEdit />
+                                            </button>
                                             <button
                                                 onClick={() => handleDelete(coupon._id)}
                                                 className="text-[#d9a299] hover:text-[#c99289]"
