@@ -12,7 +12,6 @@ import DashBoardLayout from "../Layout/DashBoard/DasBoardlayout/DashBoardLayout"
 import DashBoardHome from "../Layout/DashBoard/DashBoardHome/DashBoardHome";
 import MyProfile from "../Pages/DashBoardPages/MyProfile";
 import PendingBookings from "../Pages/DashBoardPages/PendingBookings";
-import Announcements from "../Pages/DashBoardPages/Announcements";
 import MemberLayout from "../Layout/MemberDashBoard/MemberLayout/MemberLayout";
 import MemberDashHome from "../Layout/MemberDashBoard/MemberDashHome/MemberDashHome";
 import MemberProfile from "../Pages/MemberDeshBoardPages/Profile/MemberProfile";
@@ -31,10 +30,12 @@ import ManageMembers from "../Pages/AdmindashBoardPages/ManageMembers";
 import AllUsers from "../Pages/AdmindashBoardPages/AllUsers";
 import ManageCourts from "../Pages/AdmindashBoardPages/ManageCourts";
 import ManageCupon from "../Pages/AdmindashBoardPages/ManageCupon";
-import Announcement from "../Pages/AdmindashBoardPages/Announcement";
 import PaymentForm from "../AllForm/PaymentForm/PaymentForm";
 import AdminCoupons from "../AllForm/PaymentForm/AdminCoupons";
 import DashBoardStats from "../Pages/Share/DashBoardStatus/DashBoardStatus";
+import UserNews from "../Pages/DashBoardPages/UserNews";
+import Announcements from "../Pages/AdmindashBoardPages/Announcements/Announcements";
+import MemberAnnuence from "../Pages/MemberDeshBoardPages/MemberAnnounce/MemberAnnuence";
 
 
 export const router = createBrowserRouter([
@@ -95,7 +96,7 @@ export const router = createBrowserRouter([
       },
       {
         path: '/dashboard/announcements',
-        element: <PrivateRoute><Announcements></Announcements></PrivateRoute>
+        element: <PrivateRoute><UserNews></UserNews></PrivateRoute>
       },
     ]
   },
@@ -132,6 +133,10 @@ export const router = createBrowserRouter([
       {
         path: '/member-dashboard/payment-history',
         element: <PrivateRoute><Payment></Payment></PrivateRoute>
+      },
+      {
+        path: '/member-dashboard/Announcements',
+        element: <PrivateRoute><MemberAnnuence></MemberAnnuence></PrivateRoute>
       },
 
     ]
@@ -184,7 +189,7 @@ export const router = createBrowserRouter([
       },
       {
         path: '/admin-dashboard/announcements',
-        element: <PrivateRoute><Announcement></Announcement></PrivateRoute>
+        element: <PrivateRoute><Announcements></Announcements></PrivateRoute>
       },
       
       
