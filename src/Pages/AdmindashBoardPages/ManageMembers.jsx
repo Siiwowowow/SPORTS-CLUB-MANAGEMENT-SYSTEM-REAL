@@ -3,6 +3,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { toast } from 'react-toastify';
 import { FaTrash, FaSpinner, FaSearch, FaExchangeAlt } from 'react-icons/fa';
+import Swal from 'sweetalert2';
 
 const ManageMembers = () => {
     const axiosInstance = useAxiosSecure();
@@ -119,20 +120,27 @@ const ManageMembers = () => {
                                     <td className="px-4 py-3 flex gap-2 flex-wrap">
                                         {/* Change Role */}
                                         <button
-                                            onClick={() => {
-                                                if (
-                                                    confirm(
-                                                        `Change role from ${member.role} to ${
-                                                            member.role === 'member' ? 'user' : 'member'
-                                                        }?`
-                                                    )
-                                                ) {
-                                                    roleMutation.mutate({
-                                                        id: member._id,
-                                                        newRole: member.role === 'member' ? 'user' : 'member'
-                                                    });
-                                                }
-                                            }}
+                                            onClick={async () => {
+    const newRole = member.role === 'member' ? 'user' : 'member';
+    const result = await Swal.fire({
+        title: 'Change Role?',
+        text: `Change role from ${member.role} to ${newRole}?`,
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, change it',
+        cancelButtonText: 'Cancel',
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33'
+    });
+
+    if (result.isConfirmed) {
+        roleMutation.mutate({
+            id: member._id,
+            newRole: newRole
+        });
+    }
+}}
+
                                             disabled={roleMutation.isLoading}
                                             className="flex items-center px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 text-xs"
                                         >
