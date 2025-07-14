@@ -11,8 +11,7 @@ const useCourts = (currentPage) => {
   return useQuery({
     queryKey: ['courts', currentPage],
     queryFn: async () => {
-      // Public API call: no auth token needed
-      const response = await axiosInstance.get(`/allCourts?page=${currentPage}&limit=6`);
+      const response = await axiosInstance.get(`/public/courts?page=${currentPage}&limit=6`);
       return response.data;
     },
     staleTime: 5 * 60 * 1000, // cache for 5 minutes
@@ -24,7 +23,8 @@ const GameCourt = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const { data, isLoading, isError, error } = useCourts(currentPage);
 
-  const courts = data?.bookings || [];
+  // Updated to match backend response structure
+  const courts = data?.courts || [];
   const totalPages = Math.ceil((data?.total || 0) / 6);
 
   const handlePrev = () => setCurrentPage((prev) => Math.max(prev - 1, 1));

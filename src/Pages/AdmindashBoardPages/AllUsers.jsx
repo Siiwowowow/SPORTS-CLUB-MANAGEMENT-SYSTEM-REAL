@@ -1,7 +1,8 @@
 import React, { useState} from 'react';
 import { useQuery, } from '@tanstack/react-query';
 import { FaSearch, FaSpinner } from 'react-icons/fa';
-import useAxiosSecure from '../../hooks/useAxiosSecure';
+import useAxiosSecure from '../../Hooks/useAxiosSecure';
+
 
 
 const AllUsers = () => {
