@@ -13,12 +13,29 @@ import {
   FaSignOutAlt
 } from 'react-icons/fa';
 import BrandLogo from '../../../Pages/Share/BrandLogo/BrandLogo';
+import useAuth from '../../../Hooks/useAuth';
+import toast from 'react-hot-toast';
 
 const DashBoardLayout = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
   const navigate = useNavigate();
-
+   const {  logOut } = useAuth()
+  const handleLogout = () => {
+        logOut()
+            .then(() => {
+                // Show success toast
+                toast.success('Logged out successfully!');
+                // Navigate to login page after a short delay
+                setTimeout(() => {
+                    navigate('/login');
+                }, 1000);
+            })
+            .catch((error) => {
+                console.error(error);
+                toast.error('Failed to log out');
+            });
+    };
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 1024);
@@ -47,10 +64,9 @@ const DashBoardLayout = () => {
           end
           onClick={() => isMobile && setIsDrawerOpen(false)}
           className={({ isActive }) =>
-            `flex items-center p-3 rounded-lg transition-colors ${
-              isActive
-                ? 'bg-[#FEEBF6] text-[#D9A299] font-medium'
-                : 'text-gray-700 hover:bg-gray-100'
+            `flex items-center p-3 rounded-lg transition-colors ${isActive
+              ? 'bg-[#FEEBF6] text-[#D9A299] font-medium'
+              : 'text-gray-700 hover:bg-gray-100'
             }`
           }
         >
@@ -65,14 +81,14 @@ const DashBoardLayout = () => {
     <div className="flex h-screen bg-gradient-to-br from-[#F5F5F5] via-[#dbdadb] to-[#e0dddd] overflow-hidden">
       {/* Mobile Overlay */}
       {isMobile && isDrawerOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-black bg-opacity-50 z-20 lg:hidden"
           onClick={toggleDrawer}
         />
       )}
 
       {/* Sidebar Drawer */}
-      <div 
+      <div
         className={`fixed lg:static z-30 h-full w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out
           ${isDrawerOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0`}
       >
@@ -119,20 +135,20 @@ const DashBoardLayout = () => {
               </ul>
             </div>
 
-            {/* Admin Panel - Example (you can adjust as needed) */}
-            <div>
-              {isDrawerOpen && <h3 className="text-xs uppercase text-gray-500 font-semibold mb-2">Admin</h3>}
-              <ul className="space-y-1">
-                <NavItem to="/admin-dashboard" icon={<FaUserShield />} label="Admin Panel" />
-              </ul>
-            </div>
+
 
             {/* Auth */}
             <div>
               {isDrawerOpen && <h3 className="text-xs uppercase text-gray-500 font-semibold mb-2">Account</h3>}
               <ul className="space-y-1">
-                <NavItem to="/login" icon={<FaSignInAlt />} label="Login" />
-                <NavItem to="/logout" icon={<FaSignOutAlt />} label="Logout" />
+                <li>
+                  <button
+                    onClick={handleLogout}
+                    className="flex items-center gap-2 w-full text-left text-red-500 hover:bg-red-50"
+                  >
+                    <FaSignOutAlt /> Log Out
+                  </button>
+                </li>
               </ul>
             </div>
           </nav>
@@ -144,19 +160,19 @@ const DashBoardLayout = () => {
         {/* Top Navigation Bar */}
         <header className="bg-white shadow-sm p-4 flex items-center justify-between">
           <div className="flex items-center space-x-4">
-            <button 
+            <button
               onClick={toggleDrawer}
               className="text-gray-600 hover:text-gray-900 lg:hidden"
             >
               <FaBars size={20} />
             </button>
-            <button 
+            <button
               onClick={goBack}
               className="text-gray-600 hover:text-gray-900"
             >
               <FaChevronLeft size={20} />
             </button>
-            <button 
+            <button
               onClick={goHome}
               className="text-gray-600 hover:text-gray-900"
             >

@@ -2,7 +2,8 @@ import React, { useState, useEffect,  useCallback } from 'react';
 import { FaTrash, FaEdit, FaPlus, FaSpinner, FaSearch } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import CourtModal from './CourtModal';
-import useAxiosSecure from '../../hooks/useAxiosSecure';
+import useAxiosSecure from '../../Hooks/useAxiosSecure';
+
 
 const ManageCourts = () => {
     const axiosInstance = useAxiosSecure();

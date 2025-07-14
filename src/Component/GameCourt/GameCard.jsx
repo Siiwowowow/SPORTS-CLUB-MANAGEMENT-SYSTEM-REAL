@@ -1,10 +1,9 @@
 import { FaStar, FaClock } from 'react-icons/fa';
 import { useState } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate, useLocation } from 'react-router';
 import BookingModal from './BookingModal';
 import useAuth from '../../Hooks/useAuth';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-
 import toast from 'react-hot-toast';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 
@@ -25,10 +24,11 @@ const GameCard = ({ court }) => {
 
     const { user } = useAuth();
     const navigate = useNavigate();
+    const location = useLocation();
     const axiosInstance = useAxiosSecure();
     const queryClient = useQueryClient();
 
-    // Booking mutation using TanStack Query
+    // Booking mutation
     const { mutate: createBooking, isPending } = useMutation({
         mutationFn: async (bookingData) => {
             const response = await axiosInstance.post('/bookings', bookingData);

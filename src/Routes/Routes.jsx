@@ -53,7 +53,7 @@ export const router = createBrowserRouter([
       {
         path: '/by-courts',
         element: <GameCourt></GameCourt>,
-        loader: () => fetch(`${import.meta.env.VITE_API_URL}/allCourts`)
+       
       },
 
       {

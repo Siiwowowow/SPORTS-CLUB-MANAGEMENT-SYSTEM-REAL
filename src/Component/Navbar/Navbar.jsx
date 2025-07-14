@@ -52,7 +52,9 @@ const Navbar = () => {
                     <FiMap /> Courts
                 </NavLink>
             </li>
-            <li>
+            {
+                user && (
+                    <li>
                 <NavLink
                    to="/main-dashboard"
                     className={({ isActive }) =>
@@ -64,6 +66,8 @@ const Navbar = () => {
                     <FiUser /> Dashboard
                 </NavLink>
             </li>
+                )
+            }
         </>
     );
 
