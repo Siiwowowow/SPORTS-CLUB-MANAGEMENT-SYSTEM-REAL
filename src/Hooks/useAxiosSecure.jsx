@@ -4,7 +4,7 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import useAuth from "./useAuth";
 const axiosInstance=axios.create({
-    baseURL: `http://localhost:3000`,
+    baseURL: `https://scms-a12-server.vercel.app`,
   
 })
 
