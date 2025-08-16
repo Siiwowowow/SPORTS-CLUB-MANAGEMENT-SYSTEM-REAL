@@ -34,7 +34,7 @@ const AboutSection = () => {
                     ABOUT OUR CLUB
                 </span>
                 <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
-                    Welcome to <span className="text-blue-600">Elite Sports Club</span>
+                    Welcome to <span className="text-[#dba69e]">Elite Sports Club</span>
                 </h2>
                 <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                     Founded in 1985, we've been the premier destination for athletes of all levels,
@@ -58,7 +58,7 @@ const AboutSection = () => {
                         <div className="
                             w-16 h-16 mb-6 mx-auto rounded-lg
                             bg-blue-50 flex items-center justify-center
-                            text-blue-600
+                            text-[#dba69e]
                             group-hover:bg-blue-600 group-hover:text-white
                             transition-colors duration-300
                         ">
@@ -77,7 +77,7 @@ const AboutSection = () => {
                         <div className="
                             w-12 h-12 rounded-lg
                             bg-blue-100 flex items-center justify-center
-                            text-blue-600 mr-4
+                            text-[#dba69e] mr-4
                         ">
                             <FaHistory className="text-xl" />
                         </div>
@@ -114,7 +114,7 @@ const AboutSection = () => {
                         <div className="
                             w-12 h-12 rounded-lg
                             bg-blue-100 flex items-center justify-center
-                            text-blue-600 mr-4
+                            text-[#dba69e] mr-4
                         ">
                             <FaBullseye className="text-xl" />
                         </div>
@@ -128,25 +128,25 @@ const AboutSection = () => {
                     </p>
                     <ul className="space-y-3 mb-6">
                         <li className="flex items-start">
-                            <svg className="w-5 h-5 text-blue-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg className="w-5 h-5 text-[#dba69e] mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
                             </svg>
                             <span className="text-gray-700">Olympic-grade training facilities</span>
                         </li>
                         <li className="flex items-start">
-                            <svg className="w-5 h-5 text-blue-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg className="w-5 h-5 text-[#dba69e] mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
                             </svg>
                             <span className="text-gray-700">Certified professional coaches</span>
                         </li>
                         <li className="flex items-start">
-                            <svg className="w-5 h-5 text-blue-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg className="w-5 h-5 text-[#dba69e] mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
                             </svg>
                             <span className="text-gray-700">Inclusive programs for all ages</span>
                         </li>
                         <li className="flex items-start">
-                            <svg className="w-5 h-5 text-blue-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg className="w-5 h-5 text-[#dba69e] mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
                             </svg>
                             <span className="text-gray-700">Community-building events</span>

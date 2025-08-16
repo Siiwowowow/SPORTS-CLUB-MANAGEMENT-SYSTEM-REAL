@@ -6,6 +6,7 @@ import LocationSection from '../../Pages/LocatrionSection/LocationSection';
 import { useLoaderData } from 'react-router';
 import Review from '../../Pages/Review/Review';
 import LimitCourt from '../GameCourt/LimitCourt';
+import Faq from '../../Pages/Review/Faq';
 
 
 
@@ -17,6 +18,7 @@ const Home = () => {
               
             <LimitCourt/>
            <AboutSection></AboutSection>
+           <Faq/>
            <Review/>
            <CuponSection></CuponSection>
            <LocationSection branches={branches}></LocationSection>
