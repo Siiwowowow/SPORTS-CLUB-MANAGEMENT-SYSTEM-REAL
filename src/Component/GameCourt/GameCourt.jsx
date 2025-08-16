@@ -110,7 +110,7 @@ const GameCourt = () => {
                   onClick={handlePrev}
                   disabled={currentPage === 1}
                   className={`px-3 py-1 rounded border ${
-                    currentPage === 1 ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'hover:bg-gray-50 text-gray-700'
+                    currentPage === 1 ? 'bg-base-100 text-gray-400 cursor-not-allowed' : 'hover:bg-gray-50 text-gray-700'
                   }`}
                 >
                   Prev
@@ -121,7 +121,7 @@ const GameCourt = () => {
                     key={idx + 1}
                     onClick={() => handlePageClick(idx + 1)}
                     className={`px-3 py-1 rounded border ${
-                      currentPage === idx + 1 ? 'bg-[#d9a299] text-white' : 'hover:bg-gray-50 text-gray-700'
+                      currentPage === idx + 1 ? 'bg-[#d9a299] text-base-400' : 'hover:bg-base-400 text-base-700'
                     }`}
                   >
                     {idx + 1}
@@ -132,7 +132,7 @@ const GameCourt = () => {
                   onClick={handleNext}
                   disabled={currentPage === totalPages}
                   className={`px-3 py-1 rounded border ${
-                    currentPage === totalPages ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'hover:bg-gray-50 text-gray-700'
+                    currentPage === totalPages ? 'bg-base-100 text-gray-400 cursor-not-allowed' : 'hover:bg-gray-50 text-gray-700'
                   }`}
                 >
                   Next

@@ -2,7 +2,7 @@ import React from 'react';
 
 const Review = () => {
     return (
-        <div className="bg-gray-50 py-16">
+        <div className="bg-base-50 py-16">
             <style>{`
                 @keyframes marqueeScroll {
                     0% { transform: translateX(0%); }
@@ -22,30 +22,30 @@ const Review = () => {
                     <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
                         What Our Members Say
                     </h2>
-                    <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                    <p className="text-lg text-base-400 max-w-2xl mx-auto">
                         Hear from athletes and members about their experiences with our sports club management system
                     </p>
                 </div>
 
                 {/* Marquee Rows */}
                 <div className="marquee-row w-full mx-auto overflow-hidden relative">
-                    <div className="absolute left-0 top-0 h-full w-20 z-10 pointer-events-none bg-gradient-to-r from-gray-50 to-transparent"></div>
+                    <div className="absolute left-0 top-0 h-full w-20 z-10 pointer-events-none bg-gradient-to-r from-base-200 to-transparent"></div>
                     <div className="marquee-inner flex transform-gpu min-w-[200%] pt-10 pb-5" id="row1">
                         {[...testimonials, ...testimonials].map((testimonial, index) => (
                             <TestimonialCard key={index} {...testimonial} />
                         ))}
                     </div>
-                    <div className="absolute right-0 top-0 h-full w-20 md:w-40 z-10 pointer-events-none bg-gradient-to-l from-gray-50 to-transparent"></div>
+                    <div className="absolute right-0 top-0 h-full w-20 md:w-40 z-10 pointer-events-none bg-gradient-to-l from-base-200 to-transparent"></div>
                 </div>
                 
                 <div className="marquee-row w-full mx-auto overflow-hidden relative mt-4">
-                    <div className="absolute left-0 top-0 h-full w-20 z-10 pointer-events-none bg-gradient-to-r from-gray-50 to-transparent"></div>
+                    <div className="absolute left-0 top-0 h-full w-20 z-10 pointer-events-none bg-gradient-to-r from-base-200 to-transparent"></div>
                     <div className="marquee-inner marquee-reverse flex transform-gpu min-w-[200%] pt-5 pb-10" id="row2">
                         {[...testimonials, ...testimonials].map((testimonial, index) => (
                             <TestimonialCard key={index + testimonials.length} {...testimonial} />
                         ))}
                     </div>
-                    <div className="absolute right-0 top-0 h-full w-20 md:w-40 z-10 pointer-events-none bg-gradient-to-l from-gray-50 to-transparent"></div>
+                    <div className="absolute right-0 top-0 h-full w-20 md:w-40 z-10 pointer-events-none bg-gradient-to-l from-base-200 to-transparent"></div>
                 </div>
             </div>
         </div>

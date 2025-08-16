@@ -197,7 +197,7 @@ const BookingModal = ({ isOpen, onClose, court }) => {
               type="button"
               onClick={handleSubmit}
               disabled={isSubmitting}
-              className={`px-4 py-2 text-sm bg-[#d9a299] text-white hover:bg-[#f08b7c] ${
+              className={`px-4 py-2 text-sm bg-[#d9a299] text-base-100 ver:bg-[#f08b7c] ${
                 isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
               }`}
             >

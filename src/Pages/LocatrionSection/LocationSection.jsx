@@ -62,10 +62,10 @@ const LocationSection = ({ branches }) => {
 
   return (
     <div className="px-4 py-12 max-w-7xl mx-auto sticky top-0">
-      <h2 className="text-3xl md:text-4xl font-bold text-center mb-2 text-[#07373d]">
+      <h2 className="text-3xl md:text-4xl font-bold text-center mb-2 text-[#3b94a0]">
         📍 We are available in {safeBranches.length} districts
       </h2>
-      <p className="text-center text-gray-600 mb-6 max-w-lg mx-auto">
+      <p className="text-center text-base-600 mb-6 max-w-lg mx-auto">
         Search by district, city, or covered area like 'Uttara' or 'Dhanmondi' to find your nearest branch.
       </p>
 
@@ -76,28 +76,28 @@ const LocationSection = ({ branches }) => {
               key={index}
               className="p-4 border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition"
             >
-              <p className="font-semibold text-lg text-[#07373d] mb-1">
+              <p className="font-semibold text-lg text-[#3b94a0] mb-1">
                 {branch.city || "City Name"}
               </p>
-              <p className="text-sm text-gray-700 mb-0.5">
+              <p className="text-sm text-base-700 mb-0.5">
                 Region: {branch.region || "Region"}
               </p>
-              <p className="text-sm text-gray-700 mb-0.5">
+              <p className="text-sm text-base-700 mb-0.5">
                 Street: {branch.street || "House 12, Road 4"}
               </p>
-              <p className="text-sm text-gray-700 mb-0.5">
+              <p className="text-sm text-base-700 mb-0.5">
                 Zipcode: {branch.zipcode || "1207"}
               </p>
-              <p className="text-sm text-gray-700 mb-0.5">
+              <p className="text-sm text-base-700 mb-0.5">
                 Opening Hours: {branch.opening_hours || "9 AM - 9 PM"}
               </p>
-              <p className="text-sm text-gray-700">
+              <p className="text-sm text-base-700">
                 Covered Areas: {branch.covered_area ? branch.covered_area.join(', ') : "None"}
               </p>
             </div>
           ))
         ) : (
-          <p className="text-center text-gray-500 col-span-full">No branch data available.</p>
+          <p className="text-center text-base-500 col-span-full">No branch data available.</p>
         )}
       </div>
 
@@ -105,7 +105,7 @@ const LocationSection = ({ branches }) => {
         <input
           type="text"
           placeholder="Search district, city, or area..."
-          className="p-3 w-full bg-white focus:outline-none"
+          className="p-3 w-full bg-base-100 focus:outline-none"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           onKeyDown={(e) => {
@@ -144,11 +144,11 @@ const LocationSection = ({ branches }) => {
               <Popup>
                 <div className="space-y-1">
                   <p className="font-semibold text-base">{branch.city || "City"} - {branch.district || "District"}</p>
-                  <p className="text-sm text-gray-700">{branch.region || "Region"}</p>
-                  <p className="text-sm text-gray-700">Street: {branch.street || "House 12, Road 4"}</p>
-                  <p className="text-sm text-gray-700">Zipcode: {branch.zipcode || "1207"}</p>
-                  <p className="text-sm text-gray-700">Opening Hours: {branch.opening_hours || "9 AM - 9 PM"}</p>
-                  <p className="text-sm text-gray-700">Covered Areas: {branch.covered_area ? branch.covered_area.join(', ') : "None"}</p>
+                  <p className="text-sm text-base-400">{branch.region || "Region"}</p>
+                  <p className="text-sm text-base-400">Street: {branch.street || "House 12, Road 4"}</p>
+                  <p className="text-sm text-base-400">Zipcode: {branch.zipcode || "1207"}</p>
+                  <p className="text-sm text-base-400">Opening Hours: {branch.opening_hours || "9 AM - 9 PM"}</p>
+                  <p className="text-sm text-base-400">Covered Areas: {branch.covered_area ? branch.covered_area.join(', ') : "None"}</p>
                   {branch.flowchart && (
                     <a
                       href={branch.flowchart}

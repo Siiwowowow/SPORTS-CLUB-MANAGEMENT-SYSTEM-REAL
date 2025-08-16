@@ -55,7 +55,7 @@ const LimitCourt = () => {
         {courts.map((court) => (
           <div
             key={court._id}
-            className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
+            className="bg-base-100 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
           >
             <div className="h-48 overflow-hidden">
               <img
@@ -69,16 +69,16 @@ const LimitCourt = () => {
             </div>
 
             <div className="p-6">
-              <h3 className="text-xl font-bold text-gray-800 mb-2">
+              <h3 className="text-xl font-bold text-base-400 mb-2">
                 {court.name}
               </h3>
-              <p className="text-gray-600 mb-4 line-clamp-2">
+              <p className="text-base-400 mb-4 line-clamp-2">
                 {court.description}
               </p>
 
               <div className="mb-4">
-                <h4 className="font-semibold text-gray-700 mb-1">Features:</h4>
-                <ul className="list-disc list-inside text-gray-600">
+                <h4 className="font-semibold text-base-700 mb-1">Features:</h4>
+                <ul className="list-disc list-inside text-base-400">
                   {court.features.map((feature, index) => (
                     <li key={index}>{feature}</li>
                   ))}
@@ -87,7 +87,7 @@ const LimitCourt = () => {
 
               <Link
                 to={'/by-courts'}
-                className="block text-center px-4 py-2 bg-[#dba69e] text-white rounded-lg hover:bg-[#c98a80] transition-colors"
+                className="block text-center px-4 py-2 bg-[#dba69e] text-base-400 rounded-lg hover:bg-[#c98a80] transition-colors"
               >
                 See All
               </Link>

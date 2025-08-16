@@ -27,16 +27,16 @@ const features = [
 
 const AboutSection = () => {
     return (
-        <div className="max-w-7xl mx-auto px-6 py-16 lg:py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-6 py-16 lg:py-20 bg-base-100 rounded-lg shadow-lg">
             {/* Hero Section */}
             <div className="text-center mb-16">
                 <span className="inline-block px-4 py-2 mb-4 text-sm font-semibold text-blue-600 bg-blue-50 rounded-full">
                     ABOUT OUR CLUB
                 </span>
-                <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
+                <h2 className="text-4xl md:text-5xl font-bold mb-6 text-base-400">
                     Welcome to <span className="text-[#dba69e]">Elite Sports Club</span>
                 </h2>
-                <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                <p className="text-xl text-base-400 max-w-3xl mx-auto">
                     Founded in 1985, we've been the premier destination for athletes of all levels,
                     offering world-class facilities and professional coaching to help you achieve excellence.
                 </p>
@@ -48,7 +48,7 @@ const AboutSection = () => {
                     <div
                         key={index}
                         className="
-                            bg-white p-8 rounded-xl shadow-lg
+                            bg-base-100 p-8 rounded-xl shadow-lg
                             border border-gray-100
                             transition-all duration-300
                             hover:shadow-xl hover:-translate-y-2
@@ -64,15 +64,15 @@ const AboutSection = () => {
                         ">
                             {feature.icon}
                         </div>
-                        <h3 className="text-xl font-bold text-center mb-3 text-gray-800">{feature.title}</h3>
-                        <p className="text-gray-600 text-center">{feature.description}</p>
+                        <h3 className="text-xl font-bold text-center mb-3 text-base-400">{feature.title}</h3>
+                        <p className="text-base-400 text-center">{feature.description}</p>
                     </div>
                 ))}
             </div>
 
             {/* History & Mission */}
             <div className="grid lg:grid-cols-2 gap-12">
-                <div className="bg-gradient-to-br from-blue-50 to-white p-8 rounded-xl">
+                <div className="bg-gradient-to-br from-blue-200 to-base-100 p-8 rounded-xl">
                     <div className="flex items-center mb-6">
                         <div className="
                             w-12 h-12 rounded-lg
@@ -81,35 +81,35 @@ const AboutSection = () => {
                         ">
                             <FaHistory className="text-xl" />
                         </div>
-                        <h3 className="text-2xl font-bold text-gray-800">
+                        <h3 className="text-2xl font-bold text-base-800">
                             Our Heritage
                         </h3>
                     </div>
-                    <p className="text-gray-700 mb-4">
+                    <p className="text-base-400 mb-4">
                         Established in 1985 with just two tennis courts, Elite Sports Club has grown into a regional 
                         sports powerhouse spanning 15 acres with Olympic-grade facilities.
                     </p>
-                    <p className="text-gray-700 mb-6">
+                    <p className="text-base-400 mb-6">
                         We've hosted 120+ tournaments, trained 15 Olympic athletes, and welcomed over 50,000 members 
                         through our doors. Our legacy is built on passion, perseverance, and community.
                     </p>
                     <div className="flex space-x-4">
                         <div className="text-center">
                             <span className="block text-3xl font-bold text-blue-600">35+</span>
-                            <span className="text-sm text-gray-500">Years Serving</span>
+                            <span className="text-sm text-base-500">Years Serving</span>
                         </div>
                         <div className="text-center">
                             <span className="block text-3xl font-bold text-blue-600">50K+</span>
-                            <span className="text-sm text-gray-500">Members</span>
+                            <span className="text-sm text-base-500">Members</span>
                         </div>
                         <div className="text-center">
                             <span className="block text-3xl font-bold text-blue-600">120+</span>
-                            <span className="text-sm text-gray-500">Tournaments</span>
+                            <span className="text-sm text-base-500">Tournaments</span>
                         </div>
                     </div>
                 </div>
 
-                <div className="bg-gradient-to-br from-blue-50 to-white p-8 rounded-xl">
+                <div className="bg-gradient-to-br from-blue-50 to-base-200 p-8 rounded-xl">
                     <div className="flex items-center mb-6">
                         <div className="
                             w-12 h-12 rounded-lg
@@ -118,11 +118,11 @@ const AboutSection = () => {
                         ">
                             <FaBullseye className="text-xl" />
                         </div>
-                        <h3 className="text-2xl font-bold text-gray-800">
+                        <h3 className="text-2xl font-bold text-base-800">
                             Our Vision
                         </h3>
                     </div>
-                    <p className="text-gray-700 mb-4">
+                    <p className="text-base-700 mb-4">
                         To be the nation's leading sports community where individuals of all ages and abilities 
                         discover their potential through exceptional facilities, coaching, and camaraderie.
                     </p>
@@ -131,25 +131,25 @@ const AboutSection = () => {
                             <svg className="w-5 h-5 text-[#dba69e] mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
                             </svg>
-                            <span className="text-gray-700">Olympic-grade training facilities</span>
+                            <span className="text-base-400">Olympic-grade training facilities</span>
                         </li>
                         <li className="flex items-start">
                             <svg className="w-5 h-5 text-[#dba69e] mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
                             </svg>
-                            <span className="text-gray-700">Certified professional coaches</span>
+                            <span className="text-base-400">Certified professional coaches</span>
                         </li>
                         <li className="flex items-start">
                             <svg className="w-5 h-5 text-[#dba69e] mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
                             </svg>
-                            <span className="text-gray-700">Inclusive programs for all ages</span>
+                            <span className="text-base-400">Inclusive programs for all ages</span>
                         </li>
                         <li className="flex items-start">
                             <svg className="w-5 h-5 text-[#dba69e] mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
                             </svg>
-                            <span className="text-gray-700">Community-building events</span>
+                            <span className="text-base-400">Community-building events</span>
                         </li>
                     </ul>
                     

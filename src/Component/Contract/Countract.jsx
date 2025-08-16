@@ -8,17 +8,17 @@ const Contact = () => {
  
 
   return (
-    <div className="py-12 bg-gray-50">
+    <div className="py-12 bg-base-100">
       <div className="max-w-6xl mx-auto px-4">
         {/* Heading */}
         <div className="flex flex-col items-center text-center mb-12">
-          <h1 className="text-3xl md:text-4xl font-bold mb-4 text-gray-800">
+          <h1 className="text-3xl md:text-4xl font-bold mb-4 text-base-800">
             SPORTS CLUB MANAGEMENT TEAM
           </h1>
           <h2 className="text-xl font-medium text-blue-600 mb-3">
             Connect With Our Professional Staff
           </h2>
-          <p className="max-w-2xl mx-auto text-gray-600 text-base">
+          <p className="max-w-2xl mx-auto text-base-400 text-base">
             Our dedicated team of sports professionals is committed to delivering exceptional 
             training, facilities, and club management. Get to know the experts behind your 
             athletic success.
@@ -28,7 +28,7 @@ const Contact = () => {
         {/* Cards */}
         <div className="flex flex-wrap gap-8 items-stretch justify-center">
           <div className={cardBaseClass}>
-            <img className="w-28 h-28 rounded-full object-cover border-4 border-white group-hover:border-blue-100" src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=200" alt="Head Coach" />
+            <img className="w-28 h-28 rounded-full object-cover border-4 border-base-100 group-hover:border-blue-100" src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=200" alt="Head Coach" />
             <h3 className="text-gray-800 group-hover:text-white text-xl font-semibold mt-4">
               Michael Johnson
             </h3>

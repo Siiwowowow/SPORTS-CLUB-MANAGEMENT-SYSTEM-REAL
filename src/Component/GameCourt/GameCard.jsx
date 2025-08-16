@@ -74,7 +74,7 @@ const GameCard = ({ court }) => {
   };
 
   return (
-    <div className="rounded-xl border bg-white shadow hover:shadow-lg transition flex flex-col h-full">
+    <div className="rounded-xl border bg-base-200 shadow hover:shadow-lg transition flex flex-col h-full">
       {/* Image */}
       <div className="relative">
         <img src={image} alt={name} className="w-full h-48 object-cover rounded-t-xl" />
@@ -90,13 +90,13 @@ const GameCard = ({ court }) => {
           <span className="text-sm font-semibold text-[#E8988A]">${pricePerHour}/hr</span>
         </div>
 
-        <p className="text-gray-500 text-sm mb-2 line-clamp-2">{description}</p>
+        <p className="text-base-500 text-sm mb-2 line-clamp-2">{description}</p>
 
         <div className="flex flex-wrap gap-1 mb-2">
           {features?.map((feature, idx) => (
             <span
               key={idx}
-              className="bg-gray-100 text-gray-700 text-xs px-2 py-0.5 rounded-full"
+              className="bg-base-100 text-base-700 text-xs px-2 py-0.5 rounded-full"
             >
               {feature}
             </span>
@@ -116,7 +116,7 @@ const GameCard = ({ court }) => {
             style={{ borderColor: '#E8988A', color: '#E8988A' }}
           >
             {slot_times.map((slot, idx) => (
-              <option key={idx} value={slot} className="text-black">
+              <option key={idx} value={slot} className="text-base-400 bg-base-100">
                 {slot}
               </option>
             ))}
@@ -131,7 +131,7 @@ const GameCard = ({ court }) => {
         {/* Book Now Button */}
         <button
           onClick={handleOpenModal}
-          className="mt-auto text-white text-center py-2 rounded transition"
+          className="mt-auto text-base-100 text-center py-2 rounded transition"
           style={{ backgroundColor: '#d9a299' }}
           onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#c88c84')}
           onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#d9a299')}
@@ -145,7 +145,7 @@ const GameCard = ({ court }) => {
         isOpen={isModalOpen}
         onClose={handleCloseModal}
         court={court}
-        selectedSlot={selectedSlot} // pass selected slot
+        selectedSlot={selectedSlot} 
         onSubmit={handleBookingSubmit}
         isSubmitting={isPending}
       />
