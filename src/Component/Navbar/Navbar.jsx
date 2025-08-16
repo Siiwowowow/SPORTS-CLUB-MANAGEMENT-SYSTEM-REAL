@@ -4,6 +4,7 @@ import { FaHome } from 'react-icons/fa';
 import useAuth from '../../Hooks/useAuth';
 import BrandLogo from '../../Pages/Share/BrandLogo/BrandLogo';
 import { FiMap, FiUser, FiLogOut, FiSettings } from 'react-icons/fi';
+import { MdAddCall } from "react-icons/md";
 import toast from 'react-hot-toast';
 
 const Navbar = () => {
@@ -52,6 +53,18 @@ const Navbar = () => {
                     <FiMap /> Courts
                 </NavLink>
             </li>
+            <li>
+                <NavLink
+                    to="/contract"
+                    className={({ isActive }) =>
+                        isActive
+                            ? 'text-[#D9A299] font-bold underline underline-offset-4 flex items-center gap-2'
+                            : 'text-gray-700 hover:text-[#D9A299] flex items-center gap-2'
+                    }
+                >
+                    <MdAddCall /> Contract
+                </NavLink>
+            </li>
             {
                 user && (
                     <li>
@@ -72,7 +85,7 @@ const Navbar = () => {
     );
 
     return (
-        <div className="navbar sticky top-0 z-20 bg-base-100 shadow-sm px-4">
+        <div className="navbar sticky  top-0 z-20 p-3 bg-[#ffffff] shadow-sm px-4">
             {/* Mobile menu */}
             <div className="navbar-start">
                 
@@ -161,11 +174,11 @@ const Navbar = () => {
                                     <FiUser /> Dashboard
                                 </Link>
                             </li>
-                            <li>
-                                <Link to="/dashboard/settings" className="flex items-center gap-2">
+                            {/* <li>
+                                <Link to="/dashboard/profile" className="flex items-center gap-2">
                                     <FiSettings /> Settings
                                 </Link>
-                            </li>
+                            </li> */}
                             <div className="divider my-1"></div>
                             <li>
                                 <button

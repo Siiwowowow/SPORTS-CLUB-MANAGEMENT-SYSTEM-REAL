@@ -36,6 +36,7 @@ import DashBoardStats from "../Pages/Share/DashBoardStatus/DashBoardStatus";
 import UserNews from "../Pages/DashBoardPages/UserNews";
 import Announcements from "../Pages/AdmindashBoardPages/Announcements/Announcements";
 import MemberAnnuence from "../Pages/MemberDeshBoardPages/MemberAnnounce/MemberAnnuence";
+import Countract from "../Component/Contract/Countract";
 
 
 export const router = createBrowserRouter([
@@ -52,7 +53,12 @@ export const router = createBrowserRouter([
       },
       {
         path: '/by-courts',
-        element: <GameCourt></GameCourt>,
+        element: <PrivateRoute><GameCourt></GameCourt></PrivateRoute>,
+       
+      },
+      {
+        path: '/contract',
+        element: <Countract></Countract>,
        
       },
 

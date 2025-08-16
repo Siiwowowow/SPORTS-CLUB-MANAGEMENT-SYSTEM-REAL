@@ -32,7 +32,7 @@ const slides = [
 
 const Slider = () => {
     return (
-        <div className="max-w-7xl mt-2 mx-auto rounded-xl overflow-hidden shadow-lg">
+        <div className="max-w-6xl mt-2 mx-auto rounded-xl overflow-hidden shadow-lg">
             <Carousel
                 autoPlay
                 infiniteLoop

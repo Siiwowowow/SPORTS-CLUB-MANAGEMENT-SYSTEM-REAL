@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react';
 import coverImg from '../../assets/img5.jpg';
 import { FaUserEdit, FaKey, FaCalendarAlt, FaUserTag } from 'react-icons/fa';
 import useAxios from '../../Hooks/useAxios';
-import useAuth from '../../hooks/useAuth';
+import useAuth from '../../Hooks/useAuth';
+
 
 const MyProfile = () => {
     const { user } = useAuth();
