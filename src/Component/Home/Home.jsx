@@ -8,14 +8,12 @@ import Review from '../../Pages/Review/Review';
 import LimitCourt from '../GameCourt/LimitCourt';
 import Faq from '../../Pages/Review/Faq';
 
-
-
-
 const Home = () => {
     const branches = useLoaderData();
     return (
         <div>
            <Slider></Slider>
+          
             <LimitCourt/>
            <AboutSection></AboutSection>
            <Faq/>

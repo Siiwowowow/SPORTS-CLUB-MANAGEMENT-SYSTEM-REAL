@@ -1,13 +1,13 @@
-import React, { useState, } from "react";
+import React, { useState } from "react";
 import { Outlet, NavLink, useNavigate } from "react-router";
 import {
   FaHome,
-  FaUser,
   FaClock,
   FaBullhorn,
   FaBars,
   FaChevronLeft,
   FaSignOutAlt,
+  FaTimes, // ❌ cross icon
 } from "react-icons/fa";
 import BrandLogo from "../../../Pages/Share/BrandLogo/BrandLogo";
 import useAuth from "../../../Hooks/useAuth";
@@ -15,6 +15,7 @@ import toast from "react-hot-toast";
 
 const DashBoardLayout = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isMobileOpen, setIsMobileOpen] = useState(false); // mobile sidebar toggle
   const navigate = useNavigate();
   const { logOut } = useAuth();
 
@@ -33,38 +34,37 @@ const DashBoardLayout = () => {
   };
 
   const toggleCollapse = () => setIsCollapsed(!isCollapsed);
+  const toggleMobile = () => setIsMobileOpen(!isMobileOpen);
   const goHome = () => navigate("/");
   const goBack = () => navigate(-1);
 
   // NavItem component
-  const NavItem = ({ to, icon, label }) => {
-    return (
-      <li>
-        <NavLink
-          to={to}
-          end
-          className={({ isActive }) =>
-            `flex items-center p-3 rounded-lg transition-colors ${
-              isActive
-                ? "bg-[#FEEBF6] text-[#D9A299] font-medium"
-                : "text-gray-700 hover:bg-gray-100"
-            }`
-          }
-        >
-          <span className="mr-3 text-lg">{icon}</span>
-          {!isCollapsed && <span>{label}</span>}
-        </NavLink>
-      </li>
-    );
-  };
+  const NavItem = ({ to, icon, label }) => (
+    <li>
+      <NavLink
+        to={to}
+        end
+        className={({ isActive }) =>
+          `flex items-center p-3 rounded-lg transition-colors ${
+            isActive
+              ? "bg-[#FEEBF6] text-[#D9A299] font-medium"
+              : "text-gray-700 hover:bg-gray-100"
+          }`
+        }
+      >
+        <span className="mr-3 text-lg">{icon}</span>
+        {!isCollapsed && <span>{label}</span>}
+      </NavLink>
+    </li>
+  );
 
   return (
     <div className="flex h-screen bg-gradient-to-br from-[#F5F5F5] via-[#dbdadb] to-[#e0dddd] overflow-hidden">
       {/* Sidebar */}
       <div
-        className={`h-full bg-white shadow-lg flex flex-col transition-all duration-300 ${
-          isCollapsed ? "w-20" : "w-64"
-        }`}
+        className={`fixed md:relative h-full bg-white shadow-lg flex flex-col transition-all duration-300 z-50
+          ${isCollapsed ? "w-20" : "w-64"}
+          ${isMobileOpen ? "left-0" : "-left-64 md:left-0"}`}
       >
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b">
@@ -76,12 +76,23 @@ const DashBoardLayout = () => {
               </span>
             </div>
           )}
-          <button
-            onClick={toggleCollapse}
-            className="text-gray-500 hover:text-gray-700"
-          >
-            <FaBars size={20} />
-          </button>
+          <div className="flex items-center gap-2">
+            {/* Collapse always visible on large screen */}
+            <button
+              onClick={toggleCollapse}
+              className="hidden md:block text-gray-500 hover:text-gray-700"
+            >
+              <FaBars size={20} />
+            </button>
+
+            {/* Mobile close button */}
+            <button
+              onClick={toggleMobile}
+              className="block md:hidden text-gray-500 hover:text-gray-700"
+            >
+              {isMobileOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
+            </button>
+          </div>
         </div>
 
         {/* Navigation */}
@@ -170,6 +181,14 @@ const DashBoardLayout = () => {
               <FaHome size={20} />
             </button>
           </div>
+
+          {/* Mobile menu toggle (duplicate for convenience) */}
+          <button
+            onClick={toggleMobile}
+            className="block md:hidden text-gray-600 hover:text-gray-900"
+          >
+            {isMobileOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
+          </button>
         </header>
 
         {/* Content Area */}

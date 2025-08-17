@@ -5,7 +5,8 @@ import { FaTrash, FaTag, FaCalendarAlt, FaEdit } from 'react-icons/fa';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import toast from 'react-hot-toast';
-import useAxiosSecure from '../../Hooks/useAxiosSecure';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
+
 
 
 
