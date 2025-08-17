@@ -1,9 +1,10 @@
 import React from 'react';
+import MyProfile from '../../../Pages/DashBoardPages/MyProfile';
 
 const MemberDashHome = () => {
     return (
         <div>
-          <h1>Hi This is member Home dash board</h1>
+          <MyProfile />
         </div>
     );
 };

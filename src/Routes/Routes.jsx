@@ -37,6 +37,7 @@ import UserNews from "../Pages/DashBoardPages/UserNews";
 import Announcements from "../Pages/AdmindashBoardPages/Announcements/Announcements";
 import MemberAnnuence from "../Pages/MemberDeshBoardPages/MemberAnnounce/MemberAnnuence";
 import Countract from "../Component/Contract/Countract";
+import AdminHome from "../Layout/AdminDashBoard/AdminHome";
 
 
 export const router = createBrowserRouter([
@@ -163,7 +164,7 @@ export const router = createBrowserRouter([
       },
       {
         path: '/admin-dashboard',
-        element: <PrivateRoute><MemberDashHome></MemberDashHome></PrivateRoute>
+        element: <PrivateRoute><AdminHome></AdminHome></PrivateRoute>
       },
       {
         path: '/admin-dashboard/admin-profile',

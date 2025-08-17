@@ -10,12 +10,12 @@ import Faq from '../../Pages/Review/Faq';
 
 
 
+
 const Home = () => {
     const branches = useLoaderData();
     return (
         <div>
            <Slider></Slider>
-              
             <LimitCourt/>
            <AboutSection></AboutSection>
            <Faq/>

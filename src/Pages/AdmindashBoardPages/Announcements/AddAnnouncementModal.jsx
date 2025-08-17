@@ -1,8 +1,8 @@
-// AddAnnouncementModal.jsx
 import React, { useState } from 'react';
 import { FiX } from 'react-icons/fi';
-import useAxiosSecure from '../../../hooks/useAxiosSecure';
+
 import toast from 'react-hot-toast';
+import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 
 const AddAnnouncementModal = ({ isOpen, onClose, refetch }) => {
     const axiosSecure = useAxiosSecure();
@@ -13,45 +13,85 @@ const AddAnnouncementModal = ({ isOpen, onClose, refetch }) => {
         status: 'active',
         startDate: '',
         endDate: '',
-        priority: 'medium'
+        priority: 'medium',
+        isPinned: false
     });
 
     const handleChange = e => {
-        const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
+        const { name, value, type, checked } = e.target;
+        setFormData(prev => ({ 
+            ...prev, 
+            [name]: type === 'checkbox' ? checked : value 
+        }));
     };
 
     const handleSubmit = async e => {
         e.preventDefault();
         const toastId = toast.loading('Creating announcement...');
+        
         try {
-            await axiosSecure.post('/announcements', {
-                ...formData,
-                createdAt: new Date(),
-                updatedAt: new Date()
-            });
-            await refetch();
-            toast.success('Announcement created successfully!', { id: toastId });
-            onClose();
-            setFormData({ 
-                title: '', 
-                content: '', 
-                type: '', 
-                status: 'active',
-                startDate: '',
-                endDate: '',
-                priority: 'medium'
-            });
+            // Prepare the payload with ISO string dates
+            const payload = {
+                title: formData.title,
+                content: formData.content,
+                type: formData.type,
+                status: formData.status,
+                startDate: formData.startDate ? new Date(formData.startDate).toISOString() : null,
+                endDate: formData.endDate ? new Date(formData.endDate).toISOString() : null,
+                priority: formData.priority,
+                isPinned: formData.isPinned,
+                createdAt: new Date().toISOString(),
+                updatedAt: new Date().toISOString()
+            };
+
+            console.log('Submitting announcement:', payload);
+
+            const response = await axiosSecure.post('/announcements', payload);
+            
+            console.log('Response:', response.data);
+            
+            if (response.data.insertedId) {
+                toast.success('Announcement created successfully!', { id: toastId });
+                await refetch();
+                onClose();
+                setFormData({ 
+                    title: '', 
+                    content: '', 
+                    type: '', 
+                    status: 'active',
+                    startDate: '',
+                    endDate: '',
+                    priority: 'medium',
+                    isPinned: false
+                });
+            } else {
+                throw new Error('Failed to create announcement');
+            }
         } catch (error) {
             console.error('Error adding announcement:', error);
-            toast.error('Failed to create announcement', { id: toastId });
+            let errorMessage = 'Failed to create announcement';
+            
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                errorMessage = error.response.data?.message || 
+                             error.response.statusText || 
+                             `Server error: ${error.response.status}`;
+            } else if (error.request) {
+                // The request was made but no response was received
+                errorMessage = 'No response from server';
+            } else {
+                // Something happened in setting up the request
+                errorMessage = error.message;
+            }
+            
+            toast.error(errorMessage, { id: toastId });
         }
     };
 
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0  bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
             <div className="bg-white rounded-lg shadow-xl p-6 w-full max-w-2xl relative max-h-[90vh] overflow-y-auto">
                 <button 
                     onClick={onClose} 
@@ -59,7 +99,9 @@ const AddAnnouncementModal = ({ isOpen, onClose, refetch }) => {
                 >
                     <FiX size={24} />
                 </button>
+                
                 <h2 className="text-2xl font-bold text-gray-800 mb-6">Add New Announcement</h2>
+                
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
@@ -166,6 +208,20 @@ const AddAnnouncementModal = ({ isOpen, onClose, refetch }) => {
                                 <option value="active">Active</option>
                                 <option value="inactive">Inactive</option>
                             </select>
+                        </div>
+
+                        <div className="flex items-center">
+                            <input
+                                type="checkbox"
+                                name="isPinned"
+                                checked={formData.isPinned}
+                                onChange={handleChange}
+                                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                                id="isPinned"
+                            />
+                            <label htmlFor="isPinned" className="ml-2 block text-sm text-gray-700">
+                                Pin this announcement
+                            </label>
                         </div>
                     </div>
 

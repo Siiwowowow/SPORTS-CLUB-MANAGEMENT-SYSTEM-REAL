@@ -7,6 +7,7 @@ import AddAnnouncementModal from './AddAnnouncementModal';
 import EditAnnouncementModal from './EditAnnouncementModal';
 import toast from 'react-hot-toast';
 
+
 const Announcements = () => {
     const axiosSecure = useAxiosSecure();
     const [isAddOpen, setIsAddOpen] = useState(false);
@@ -129,6 +130,7 @@ const Announcements = () => {
                 announcement={selectedAnnouncement}
                 refetch={refetch}
             />
+    
         </div>
     );
 };
