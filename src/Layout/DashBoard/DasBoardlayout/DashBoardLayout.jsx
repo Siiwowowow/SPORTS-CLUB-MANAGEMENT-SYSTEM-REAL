@@ -113,6 +113,20 @@ const DashBoardLayout = () => {
           <div>
             {!isCollapsed && (
               <h3 className="text-xs uppercase text-gray-500 font-semibold mb-2">
+                Dashboard
+              </h3>
+            )}
+            <ul className="space-y-1">
+              <NavItem
+                to="/dashboard"
+                icon={<FaHome />}
+                label="Dashboard Home"
+              />
+            </ul>
+          </div>
+          <div>
+            {!isCollapsed && (
+              <h3 className="text-xs uppercase text-gray-500 font-semibold mb-2">
                 User Dashboard
               </h3>
             )}

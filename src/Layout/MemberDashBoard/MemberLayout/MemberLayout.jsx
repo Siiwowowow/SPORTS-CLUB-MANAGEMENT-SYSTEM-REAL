@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Outlet, NavLink, useNavigate } from 'react-router';
 import {
-  FaHome, FaArrowLeft, FaBars, FaTimes,
+  FaHome, FaArrowLeft, FaBars, FaTimes,FaUser,
   FaClock, FaCheckCircle, FaCalendarCheck, FaReceipt, FaBullhorn
 } from 'react-icons/fa';
 import BrandLogo from '../../../Pages/Share/BrandLogo/BrandLogo';
@@ -26,6 +26,7 @@ const MemberLayout = () => {
 
   const navItems = [
     { to: '/', icon: <FaHome />, label: 'Home' },
+    { to: '/member-dashboard/member-profile', icon: <FaUser /> , label: 'Profile' },
    
     { to: '/member-dashboard/pending-bookings', icon: <FaClock />, label: 'Pending' },
     { to: '/member-dashboard/approved-bookings', icon: <FaCheckCircle />, label: 'Approved' },

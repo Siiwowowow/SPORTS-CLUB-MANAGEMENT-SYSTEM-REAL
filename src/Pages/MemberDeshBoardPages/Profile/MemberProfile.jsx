@@ -3,8 +3,9 @@ import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router';
 import { FaCalendarAlt, FaUserTag, FaCrown, FaArrowLeft } from 'react-icons/fa';
 import coverImg from '../../../assets/img5.jpg';
-import useAuth from '../../../hooks/useAuth';
-import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import useAuth from '../../../Hooks/useAuth';
+import useAxiosSecure from '../../../Hooks/useAxiosSecure';
+
 
 const MemberProfile = () => {
     const { user, loading: authLoading } = useAuth();
@@ -17,10 +18,11 @@ const MemberProfile = () => {
         queryFn: async () => {
             const response = await axiosInstance.get(`/users/${user.email}`);
             if (!response.data) throw new Error('No user data found');
-            if (response.data.role !== 'member') {
-                navigate('/unauthorized', { replace: true });
-                return null;
-            }
+            if (response.data.role !== 'member' && response.data.role !== 'admin') {
+    navigate('/unauthorized', { replace: true });
+    return null;
+}
+
             return response.data;
         },
         staleTime: 1000 * 60 * 5,
